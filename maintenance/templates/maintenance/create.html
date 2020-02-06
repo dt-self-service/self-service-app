@@ -26,74 +26,39 @@
                 </div>
                 <!-- Description text field-->
                   <!-- Dropdown Maintenance Type -->
-                  <div class="small mb-1">Maintenance Type</div>
-                  <div class="dropdown mb-4">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Planned
-                    </button>
-                    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Planned</a>
-                      <a class="dropdown-item" href="#">Unplanned</a>
-                    </div>
-                  </div>
+                  <label for='maintenance_type'>Maintenance Type</label>
+                  <select class="form-control" id="maintenance_type">
+                    <option>Planned</option>
+                    <option>Unplanned</option>
+                  </select>
                 <!-- Dropdown -->
                   <!-- Dropdown Recurrence -->
-                  <div class="small mb-1">Recurrence</div>
-                  <div class="dropdown mb-4">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Once only
-                    </button>
-                    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Daily</a>
-                      <a class="dropdown-item" href="#">Day of the week</a>
-                      <a class="dropdown-item" href="#">Day of month</a>
-                      <a class="dropdown-item" href="#">Once only</a>
-                    </div>
-                  </div>
+                  <label for='recurrence'>Recurrence</label>
+                  <select class="form-control" id="recurrence">
+                    <option>Once Only</option>
+                    <option>Daily</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                  </select>
+                <!-- Dropdown -->
+                  <!-- Range Start -->
+                  <label for="range_start">Maintenance Start (Format Example: 2019-01-15 23:00)</label>
+                  <input type="text" class="form-control" id="range_start">
+                <!-- Dropdown -->
+                  <!-- Range End -->
+                  <label for="range_end">Maintenance End (Format Example: 2019-01-15 23:00)</label>
+                  <input type="text" class="form-control" id="range_end">
                 <!-- Dropdown -->
                   <!-- Dropdown Recurrence -->
-                  <div class="small mb-1">Maintenance Start</div>
-                  <div class="dropdown mb-4">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Month/Day/Year
-                    </button>
-                    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Daily</a>
-                      <a class="dropdown-item" href="#">Day of the week</a>
-                      <a class="dropdown-item" href="#">Day of month</a>
-                      <a class="dropdown-item" href="#">Once only</a>
-                    </div>
-                  </div>
+                  <label for='surpression'>Recurrence</label>
+                  <select class="form-control" id="surpression">
+                    <option>Detect problems and alert</option>
+                    <option>Detect problems but don't alert</option>
+                    <option>Disable problem detection during maintenance</option>
+                  </select>
                 <!-- Dropdown -->
-                  <!-- Dropdown Recurrence -->
-                  <div class="small mb-1">Maintenance End</div>
-                  <div class="dropdown mb-4">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Month/Day/Year
-                    </button>
-                    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Daily</a>
-                      <a class="dropdown-item" href="#">Day of the week</a>
-                      <a class="dropdown-item" href="#">Day of month</a>
-                      <a class="dropdown-item" href="#">Once only</a>
-                    </div>
-                  </div>
-                <!-- Dropdown -->
-                  <!-- Dropdown Recurrence -->
-                  <div class="small mb-1">Problem detection and alerting</div>
-                  <div class="dropdown mb-4">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Detect problems and alert
-                    </button>
-                    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Detect problems and alert</a>
-                      <a class="dropdown-item" href="#">Detect problems but don't alert</a>
-                      <a class="dropdown-item" href="#">Disable problem detection during maintenance</a>
-                    </div>
-                  </div>
-                <!-- Dropdown -->
-                  <button class = "btn btn-success" id="submitWindow">Submit</button>
                 </div>
+                <button class = "btn btn-success" id="submitWindow">Submit</button>
               </div>
         </div>
         <!-- /.container-fluid -->

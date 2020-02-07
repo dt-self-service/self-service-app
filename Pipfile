@@ -9,6 +9,7 @@ pylint = "*"
 [packages]
 django-admin = "*"
 django = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"

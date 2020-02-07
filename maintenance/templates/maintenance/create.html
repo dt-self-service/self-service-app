@@ -1,69 +1,15 @@
 {% extends "dashboard/base.html" %}
 {% block title %}Create Maintenance Window{% endblock title %}
 {% block content %}
-  {% load static %}
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
-              <!-- Basic Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Configuration</h6>
-                </div>
-                <div class="card-body">
-                  <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below that correspond with your organization's maintenance window schedule.</p>
-                <!-- Name your maintenance window text field--->
-                <div class="form-group">
-                  <div class="small mb-1">Name your maintenance window</div>
-                  <input type="text" class="form-control form-control-user" id="maintTitle" placeholder="E.g. reason of maintenance">
-                </div>
-                <!-- Name your maintenance window text field-->
-                <!-- Description text field--->
-                <div class="form-group">
-                  <div class="small mb-1">Description</div>
-                  <input type="text" class="form-control form-control-user" id="desc" placeholder="">
-                </div>
-                <!-- Description text field-->
-                  <!-- Dropdown Maintenance Type -->
-                  <label for='maintenance_type'>Maintenance Type</label>
-                  <select class="form-control" id="maintenance_type">
-                    <option>Planned</option>
-                    <option>Unplanned</option>
-                  </select>
-                <!-- Dropdown -->
-                  <!-- Dropdown Recurrence -->
-                  <label for='recurrence'>Recurrence</label>
-                  <select class="form-control" id="recurrence">
-                    <option>Once Only</option>
-                    <option>Daily</option>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                  </select>
-                <!-- Dropdown -->
-                  <!-- Range Start -->
-                  <label for="range_start">Maintenance Start (Format Example: 2019-01-15 23:00)</label>
-                  <input type="text" class="form-control" id="range_start">
-                <!-- Dropdown -->
-                  <!-- Range End -->
-                  <label for="range_end">Maintenance End (Format Example: 2019-01-15 23:00)</label>
-                  <input type="text" class="form-control" id="range_end">
-                <!-- Dropdown -->
-                  <!-- Dropdown Recurrence -->
-                  <label for='surpression'>Recurrence</label>
-                  <select class="form-control" id="surpression">
-                    <option>Detect problems and alert</option>
-                    <option>Detect problems but don't alert</option>
-                    <option>Disable problem detection during maintenance</option>
-                  </select>
-                <!-- Dropdown -->
-                </div>
-                <button class = "btn btn-success" id="submitWindow">Submit</button>
-              </div>
-        </div>
-        <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
+{% load crispy_forms_tags %}
+  <div class="container-fluid">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Create Maintenance Window</legend>
+        {{ form | crispy }}
+      </fieldset>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+  </div>
 {% endblock content %}

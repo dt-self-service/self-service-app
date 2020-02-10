@@ -3,13 +3,37 @@
 {% block content %}
 {% load crispy_forms_tags %}
   <div class="container-fluid">
-    <form method="POST">
-      {% csrf_token %}
-      <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Create Maintenance Window</legend>
-        {{ form | crispy }}
-      </fieldset>
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
+    <!-- Basic Card Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Configuration</h6>
+      </div>
+      <div class="card-body">
+        <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below that correspond with your organization's maintenance window schedule.</p>
+      <!-- Name your maintenance window text field--->
+        <form method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Maintenance Window</legend>
+            {{ form | crispy }}
+          </fieldset>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
 {% endblock content %}
+
+{% block page_level_additions %}
+    <!-- Page level plugins -->
+    <script>
+      $( document ).ready(function() {
+        $( '#collapseTwo' ).addClass("show");
+        $( '#nav-maintenance' ).addClass("active");
+        $( '#nav-maintenance-create' ).addClass("active");
+        
+      })
+    </script>
+{% endblock page_level_additions %}

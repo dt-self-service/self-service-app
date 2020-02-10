@@ -313,4 +313,9 @@
     <!-- Page level custom scripts -->
     <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
     <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+    <script>
+      $( document ).ready(function() {
+        $( '#nav-dashboard' ).addClass("active");
+      })
+    </script>
 {% endblock page_level_additions %}

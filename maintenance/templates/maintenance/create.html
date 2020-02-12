@@ -18,8 +18,12 @@
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">Create Maintenance Window</legend>
             {% for field in form%}
-              <label class="small mb-1" for="{{ field.name }}">{{ field.label }}</label>
-              {{ field }}
+              <div id="div_id_{{ field.name }}">
+                <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
+                <div class="mb-1">
+                  {{ field }}
+                </div>
+              </div>
             {% endfor %}
           </fieldset>
           <button type="submit" class="btn btn-success">Submit</button>
@@ -57,6 +61,7 @@
           conditional_start_time.hide(); 
           conditional_duration.hide(); 
         }
+        console.log("ran change function");
       }
 
       hide_unused_fields();

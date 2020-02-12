@@ -16,5 +16,4 @@
 
 ## How to Run
 - Run "python -m pipenv shell"
-- Change into the dynatrace-admin directory
 - Run "python manage.py runserver"

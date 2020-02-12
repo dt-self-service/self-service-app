@@ -36,4 +36,28 @@
         
       })
     </script>
+    <script>
+      conditional_day_of_week = $("#div_id_window_day_of_week")
+      conditional_day_of_month = $("#div_id_window_day_of_month")
+      conditional_start_time = $("#div_id_window_start_time")
+      conditional_duration = $("#div_id_window_duration")
+
+      
+
+      function hide_unused_fields(){
+        ($('#id_window_recurrence').val() === "WEEKLY") ? conditional_day_of_week.show() : conditional_day_of_week.hide();
+        ($('#id_window_recurrence').val() === "MONTHLY") ? conditional_day_of_month.show() : conditional_day_of_month.hide();
+        if ($('#id_window_recurrence').val() !== "ONCE") {
+          conditional_start_time.show(); 
+          conditional_duration.show(); 
+        } else {
+          conditional_start_time.hide(); 
+          conditional_duration.hide(); 
+        }
+      }
+
+      hide_unused_fields();
+
+      $('#id_window_recurrence').on('change', hide_unused_fields);
+    </script>
 {% endblock page_level_additions %}

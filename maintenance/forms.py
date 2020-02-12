@@ -38,7 +38,13 @@ for i in range(31):
     DAYS_OF_MONTH.append((i+1, i+1))
 
 class create_maintenance_window(forms.Form):
-    cluster_name = forms.ChoiceField(label="Cluster Name", choices=CLUSTER_LIST)
+    cluster_name = forms.ChoiceField(
+            label="Cluster Name", 
+            choices=CLUSTER_LIST,
+            widget=forms.Select(
+                    attrs={'class': 'btn btn-secondary dropdown-toggle'}
+            )
+    )
     tenant_name = forms.CharField(label="Tenant Name", max_length=100)
     tags_list = forms.CharField(label="Tag List (Comma Seperated)", required=False)
     management_zone_name = forms.CharField(label="Management Zone ID", required=False, max_length=100)

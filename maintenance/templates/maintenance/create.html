@@ -17,7 +17,10 @@
           {% csrf_token %}
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">Create Maintenance Window</legend>
-            {{ form | crispy }}
+            {% for field in form%}
+              <label class="small mb-1" for="{{ field.name }}">{{ field.label }}</label>
+              {{ field }}
+            {% endfor %}
           </fieldset>
           <button type="submit" class="btn btn-success">Submit</button>
         </form>

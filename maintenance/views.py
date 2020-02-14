@@ -43,6 +43,6 @@ def create(request):
         form = create_maintenance_window()
     return render(request, 'maintenance/create.html', {'form': form})
 
-def day_options(request):
-    pass
+def view(request):
+    return render(request, 'maintenance/view.html')
     

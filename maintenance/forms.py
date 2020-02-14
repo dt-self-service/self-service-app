@@ -83,7 +83,7 @@ class create_maintenance_window(forms.Form):
             choices=DAYS_OF_MONTH,
             required=False,
             widget=forms.Select(
-                    attrs={'class': 'form-control btn btn-secondary dropdown-toggle col-lg-4 col-sm-12 col-md-8 col-'}
+                    attrs={'class': 'form-control btn btn-secondary dropdown-toggle col-lg-4 col-sm-12 col-md-8'}
             )
     )
     window_supression = forms.ChoiceField(

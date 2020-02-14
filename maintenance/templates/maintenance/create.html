@@ -37,7 +37,7 @@
     <!-- Page level plugins -->
     <script>
       $( document ).ready(function() {
-        $( '#collapseTwo' ).addClass("show");
+        //$( '#collapseTwo' ).addClass("show");
         $( '#nav-maintenance' ).addClass("active");
         $( '#nav-maintenance-create' ).addClass("active");
         
@@ -49,8 +49,6 @@
       conditional_start_time = $("#div_id_window_start_time")
       conditional_duration = $("#div_id_window_duration")
 
-      
-
       function hide_unused_fields(){
         ($('#id_window_recurrence').val() === "WEEKLY") ? conditional_day_of_week.show() : conditional_day_of_week.hide();
         ($('#id_window_recurrence').val() === "MONTHLY") ? conditional_day_of_month.show() : conditional_day_of_month.hide();
@@ -61,11 +59,8 @@
           conditional_start_time.hide(); 
           conditional_duration.hide(); 
         }
-        console.log("ran change function");
       }
-
       hide_unused_fields();
-
       $('#id_window_recurrence').on('change', hide_unused_fields);
     </script>
 {% endblock page_level_additions %}

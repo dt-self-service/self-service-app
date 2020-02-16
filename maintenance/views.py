@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import create_maintenance_window
+from .forms import filter_set
 from packages.config import maintenance
 import user_variables as uv
 
@@ -41,7 +42,15 @@ def create(request):
             print (payload)
     else:
         form = create_maintenance_window()
-    return render(request, 'maintenance/create.html', {'form': form})
+        formset = filter_set
+    return render(
+            request,
+            'maintenance/create.html',
+            {
+                    'form': form,
+                    'formset': formset
+            }
+    )
 
 def view(request):
     return render(request, 'maintenance/view.html')

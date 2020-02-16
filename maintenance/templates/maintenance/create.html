@@ -1,7 +1,6 @@
 {% extends "dashboard/base.html" %}
 {% block title %}Create Maintenance Window{% endblock title %}
 {% block content %}
-{% load crispy_forms_tags %}
   <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
@@ -25,6 +24,17 @@
                 </div>
               </div>
             {% endfor %}
+            <div id="form_set">
+            {% for entity_form in formset.forms %}
+              {{ entity_form }}
+            {% endfor %}
+            </div>
+            <div class="input-group-append" id="add_more_div">
+              <button type="button" class="btn btn-success add-form-row" id="add_more_button">+</button>
+            </div>
+            <div id="empty_form" style="display:none">
+              {{ formset.empty_form }}
+            </div>
           </fieldset>
           <button type="submit" class="btn btn-success">Submit</button>
         </form>
@@ -63,4 +73,13 @@
       hide_unused_fields();
       $('#id_window_recurrence').on('change', hide_unused_fields);
     </script>
+    <script>
+      $('#add_more_button').click(function() {
+        console.log("clicked");
+        console.log($('#div_id_entity_type-TOTAL_FORMS').val());
+        var form_idx = $('#div_id_entity_type-TOTAL_FORMS').val();
+        $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+        $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+      });
+  </script>
 {% endblock page_level_additions %}

@@ -78,7 +78,7 @@ def submit_create(request):
                             request.POST['tenant_name'],
                             payload
                     )
-                    return JsonResponse (new_window)
+                    return JsonResponse (new_window, safe=False)
                 except Exception as e:
                     print (e)
             else:

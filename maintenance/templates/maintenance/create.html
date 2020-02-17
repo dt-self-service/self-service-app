@@ -1,6 +1,7 @@
 {% extends "dashboard/base.html" %}
 {% block title %}Create Maintenance Window{% endblock title %}
 {% block content %}
+{% load static %}
   <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
@@ -85,23 +86,7 @@
         $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
       });
   </script>
-  <script>
-    $('#id_cluster_name').change(function(){
-      var chosen_cluster = $(this).val();
-      $.ajax({
-        type: "GET",
-        url: "/get_tenant",
-        data: { "chosen_cluster": chosen_cluster},
-        dataType: 'json',
-        success: function(data){
-          $('#id_tenant_name').empty()
-          $.each(data, function(idx, obj) {
-            $('#id_tenant_name').append($("<option />").val(obj).text(obj));
-          });
-        }
-      });
-    });
-  </script>
+
   <script>
 
     function getCookie(name) {
@@ -157,4 +142,5 @@
           });
     });
   </script>
+<script src="{% static '\admin\js\getTenantFromCluster.js' %}"></script>
 {% endblock page_level_additions %}

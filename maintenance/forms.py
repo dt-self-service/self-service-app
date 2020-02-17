@@ -254,7 +254,7 @@ class window_filters(forms.Form):
                         ("VMWARE_DATACENTER", "VMware Datacenter"),
         }
         
-        entity_type = forms.ChoiceField(choices = AVAILABLE_FILTER_FIELDS)
+        entity_type = forms.ChoiceField(label = "Entity Type", choices = AVAILABLE_FILTER_FIELDS)
         filter_value = forms.CharField(max_length=100)
 
 filter_set = formset_factory(window_filters, extra=1)

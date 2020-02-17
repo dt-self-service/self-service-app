@@ -61,16 +61,14 @@ def view(request):
             if form.is_valid():
                     pass
     else:
-            form = view_maintenance_window()
-            list_of_windows = maintenance.get_windows(uv.FULL_SET["Geo-Dev"], "geo-dev") # Hard Coded for now, Philly will add logic
-            # for (window in list_of_windows["values"]):
-            #     print(json.dumps(get_window(uv.FULL_SET["Geo-Dev"], "geo-dev", window["id"]), indent = 2) 
-            print(json.dumps(list_of_windows, indent=2))
+        form = view_maintenance_window()
+        list_of_windows = maintenance.get_windows(uv.FULL_SET["Geo-Dev"], "geo-dev") # Hard Coded for now, Philly will add logic
     return render(
             request,
             'maintenance/view.html',
             {
-                    'form': form
+                    'form': form,
+                    'list_of_windows': list_of_windows["values"]
             }
     )
     

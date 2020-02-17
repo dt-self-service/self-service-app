@@ -19,7 +19,7 @@ RECURRENCE_TYPES = [
         ("MONTHLY","Day of month"),
 ]
 
-CLUSTER_LIST = []
+CLUSTER_LIST = [("", "Choose Cluster")]
 for cluster in uv.FULL_SET:
     CLUSTER_LIST.append((cluster, cluster))
 
@@ -49,7 +49,9 @@ class create_maintenance_window(forms.Form):
     tenant_name = forms.CharField(
             label="Tenant Name",
             max_length=100,
-            widget=forms.TextInput(attrs={'class': 'form-control col-lg-4 col-sm-12 col-md-8'})
+            widget=forms.Select(
+                attrs={'class': 'btn btn-secondary dropdown-toggle col-lg-4 col-sm-12 col-md-8'}
+            )
     )
     window_name = forms.CharField(
             label="Maintenance Window Name",
@@ -176,7 +178,9 @@ class view_maintenance_window(forms.Form):
     tenant_name = forms.CharField(
             label="Tenant Name",
             max_length=100,
-            widget=forms.TextInput(attrs={'class': 'form-control col-lg-4 col-sm-12 col-md-8'})
+            widget=forms.Select(
+                attrs={'class': 'btn btn-secondary dropdown-toggle col-lg-4 col-sm-12 col-md-8'}
+            )
     )
 
 class window_filters(forms.Form):

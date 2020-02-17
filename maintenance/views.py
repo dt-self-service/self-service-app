@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render
 
 from .forms import create_maintenance_window
@@ -59,11 +60,11 @@ def create(request):
 def view(request):
     if request.method == "POST":
             form = view_maintenance_window(request.POST)
-            if form.is_valid():
-                    pass
+            cluster = uv.FULL_SET[request.POST['cluster_name']]
+            list_of_windows = maintenance.get_windows(cluster, request.POST['tenant_name'])
     else:
         form = view_maintenance_window()
-        list_of_windows = maintenance.get_windows(uv.FULL_SET["Geo-Dev"], "geo-dev") # Hard Coded for now, Philly will add logic
+        list_of_windows = {'values':{}} # Hard Coded for now, Philly will add logic
     return render(
             request,
             'maintenance/view.html',

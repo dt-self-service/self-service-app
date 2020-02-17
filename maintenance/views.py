@@ -14,6 +14,7 @@ def create(request):
     if request.method == "POST":
 
         form = create_maintenance_window(request.POST)
+        formset = filter_set
         if form.is_valid():
             # scope = maintenance.generate_scope(
             #     management_zone_id=str(request.POST['management_zone_name'])

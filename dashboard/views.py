@@ -21,4 +21,4 @@ def get_tenant(request):
         for tenant in uv.FULL_SET[cluster]["tenant"]:
             i = i + 1
             tenant_json[i] = tenant
-        return JsonResponse(tenant_json, safe=False)
+        return JsonResponse(tenant_json)

@@ -116,22 +116,6 @@ class create_maintenance_window(forms.Form):
             input_formats= ['%Y-%m-%d %H:%M'],
             widget=forms.TextInput(attrs={'class': 'form-control col-lg-4 col-sm-12 col-md-8'})
     )
-    window_add_filters = forms.BooleanField(
-            widget=forms.CheckboxInput(attrs={'class': 'form-check'}),
-            required=False,
-    )
-    tags_list = forms.CharField(
-            label="Tag List (Comma Seperated)",
-            required=False,
-            widget=forms.TextInput(attrs={'class': 'form-control col-lg-4 col-sm-12 col-md-8'})
-    )
-    management_zone_name = forms.CharField(
-            label="Management Zone ID",
-            required=False,
-            max_length=100,
-            widget=forms.TextInput(attrs={'class': 'form-control col-lg-4 col-sm-12 col-md-8'})
-    )
-
     def fields_required(self, fields):
         #    """Used for conditionally marking fields as required."""
         for field in fields:
@@ -270,7 +254,18 @@ class window_filters(forms.Form):
                         ("VMWARE_DATACENTER", "VMware Datacenter"),
         }
         
-        entity_type = forms.ChoiceField(label = "Entity Type", choices = AVAILABLE_FILTER_FIELDS)
-        filter_value = forms.CharField(max_length=100)
+        entity_type = forms.ChoiceField(
+                label = "Entity Type",
+                choices = AVAILABLE_FILTER_FIELDS,
+                widget=forms.Select(
+                        attrs={'class': 'btn btn-secondary dropdown-toggle col-lg-2 col-sm-12 col-md-8'}
+                )
+        )
+        filter_value = forms.CharField(
+                max_length=100,
+                widget=forms.TextInput(
+                        attrs={'class': 'form-control col-lg-6 col-sm-12 col-md-8'}
+                )
+        )
 
-filter_set = formset_factory(window_filters, extra=1)
+filter_set = formset_factory(window_filters, extra=1, max_num=10)

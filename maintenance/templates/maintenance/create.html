@@ -27,7 +27,14 @@
             {% endfor %}
             <div id="form_set">
             {% for entity_form in formset.forms %}
-              {{ entity_form }}
+              {% for field in entity_form %}
+                <div id="div_id_{{ field.name }}">
+                  <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
+                  <div class="mb-1">
+                    {{ field }}
+                  </div>
+                </div>
+              {% endfor %}
             {% endfor %}
             </div>
             <div class="input-group-append" id="add_more_div">

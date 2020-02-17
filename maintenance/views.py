@@ -2,9 +2,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import create_maintenance_window
+from .forms import view_maintenance_window
 from .forms import filter_set
 from packages.config import maintenance
 import user_variables as uv
+
+import json # testing purposes
 
 # Create your views here.
 def create(request):
@@ -53,5 +56,21 @@ def create(request):
     )
 
 def view(request):
-    return render(request, 'maintenance/view.html')
+    if request.method == "POST":
+            form = view_maintenance_window(request.POST)
+            if form.is_valid():
+                    pass
+    else:
+            form = view_maintenance_window()
+            list_of_windows = maintenance.get_windows(uv.FULL_SET["Geo-Dev"], "geo-dev") # Hard Coded for now, Philly will add logic
+            # for (window in list_of_windows["values"]):
+            #     print(json.dumps(get_window(uv.FULL_SET["Geo-Dev"], "geo-dev", window["id"]), indent = 2) 
+            print(json.dumps(list_of_windows, indent=2))
+    return render(
+            request,
+            'maintenance/view.html',
+            {
+                    'form': form
+            }
+    )
     

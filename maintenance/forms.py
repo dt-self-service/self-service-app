@@ -129,8 +129,6 @@ class create_maintenance_window(forms.Form):
             max_length=100,
             widget=forms.TextInput(attrs={'class': 'form-control col-lg-4 col-sm-12 col-md-8'})
     )
-    
-
 
     def fields_required(self, fields):
         #    """Used for conditionally marking fields as required."""
@@ -166,7 +164,21 @@ class create_maintenance_window(forms.Form):
             self.cleaned_data['tags_list'] = None
 
         return self.cleaned_data
-    
+
+class view_maintenance_window(forms.Form):
+    cluster_name = forms.ChoiceField(
+            label="Cluster Name", 
+            choices=CLUSTER_LIST,
+            widget=forms.Select(
+                    attrs={'class': 'btn btn-secondary dropdown-toggle col-lg-4 col-sm-12 col-md-8'}
+            )
+    )
+    tenant_name = forms.CharField(
+            label="Tenant Name",
+            max_length=100,
+            widget=forms.TextInput(attrs={'class': 'form-control col-lg-4 col-sm-12 col-md-8'})
+    )
+
 class window_filters(forms.Form):
         AVAILABLE_FILTER_FIELDS = {
                         ("APPLICATION", "Application"),

@@ -8,7 +8,7 @@
     <!-- Basic Card Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Configuration</h6>
+        <h6 class="m-0 font-weight-bold text-primary">View Windows</h6>
       </div>
       <div class="card-body">
         <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below that correspond with your organization's maintenance window schedule.</p>
@@ -16,7 +16,7 @@
         <form method="POST">
           {% csrf_token %}
           <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Create Maintenance Window</legend>
+            <legend class="border-bottom mb-4">Configured maintenance windows</legend>
             {% for field in form%}
               <div id="div_id_{{ field.name }}">
                 <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
@@ -26,7 +26,7 @@
               </div>
             {% endfor %}
           </fieldset>
-          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="submit" class="btn btn-success">View</button>
         </form>
       </div>
     </div>

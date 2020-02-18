@@ -89,13 +89,6 @@
             "index": "pypi",
             "version": "==2.22.0"
         },
-        "screen": {
-            "hashes": [
-                "sha256:29009e0306d005679cc43c8cd69856a046265433310c10e71920591de3c58fda",
-                "sha256:aebfe90de7b8a646d4f3c2b214bd6ffa2ab12ed9d0b14c08620d9c7f7b8ee670"
-            ],
-            "version": "==1.0.1"
-        },
         "sqlparse": {
             "hashes": [
                 "sha256:40afe6b8d4b1117e7dff5504d7a8ce07d9a1b15aeeade8a2d10f130a834f8177",

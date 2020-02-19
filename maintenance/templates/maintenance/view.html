@@ -26,10 +26,10 @@
               </div>
             {% endfor %}
           </fieldset>
-          <button type="submit" class="btn btn-success">View</button>
+          <button type="submit" id="get_all_windows"class="btn btn-success">View</button>
         </form>
         <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <table class="table table-striped table-bordered dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
                 <th>Name</th>
@@ -46,6 +46,43 @@
             </tbody>
             </table>
         </div>
+        <div id="view_single_window">
+          <form> 
+            <label for="maintenance_window_name">Maintenance Window Name</label><br>
+            <input type="text" id="maintenance_window_name" name="maintenance_window_name"><br>
+            <label for="maintenance_window_desc">Description</label><br>
+            <input type="text" id="maintenance_window_desc" name="Description"><br>
+            <label for="window_planned"></label><br>
+            <label for="window_plan">Window Planned</label><br>
+            <select id="window_plan">
+              <option value="PLANNED">PLANNED</option>
+              <option value="UNPLANNED">UNPLANNED</option>
+            </select><br>
+            <label for="window_recurrence">Window recurrence</label><br>
+            <select id="window_recurrence">
+              <option value="once">Once only</option>
+              <option value="daily">Daily</option>
+              <option value="day_of_week">Day of week</option>
+              <option value="day_of_month">Day of month</option>
+            </select><br>
+            <label for="window_suppression">Window suppression</label><br>
+            <select id="window_suppression">
+              <option value="detect_problems_and_alert">Detect Problems and alert</option>
+              <option value="detect_problems_but_dont_alert">Detect problems but don't alert</option>
+              <option value="disable_problem_detection">Disable problem detection during maintenance</option>
+            </select><br>
+            <label for="maintenance_start">Maintenance Start (Format Example: 2019-01-15 23:00)</label><br>
+            <input type="text" id="maintenance_start" name="maintenance_start"><br>
+            <label for="maintenance_end">Maintenance End (Format Example: 2019-01-15 23:00)</label><br>
+            <input type="text" id="maintenance_end" name="maintenance_end"><br>
+            <label for="entity_type">Entity Type</label><br>
+            <select id="entity_type">
+              <option value="application">Entity Filter (optional)</option>
+              <option value="daily">Service</option>
+            </select><br>
+          </form>
+        </div>
+        <div id="status_area"></div>
       </div>
     </div>
   </div>
@@ -53,9 +90,13 @@
 
 {% block page_level_additions %}
     <!-- Page level plugins -->
+    <!-- <script src ="https://code.jquery.com/jquery-3.3.1.js"></script> -->
     <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
-
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
     <!-- Page level custom scripts -->
     <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
     <script>
@@ -87,4 +128,5 @@
       $('#id_window_recurrence').on('change', hide_unused_fields);
     </script>
     <script src="{% static '\admin\js\getTenantFromCluster.js' %}"></script>
+    <script src="{% static '\admin\js\mWindowDetails.js' %}"></script>
 {% endblock page_level_additions %}

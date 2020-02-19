@@ -26,8 +26,9 @@
               </div>
             {% endfor %}
             <div id="form_set">
-            {% for entity_form in formset.forms %}
-              {% for field in entity_form %}
+            {{ formset.management_form }}
+            {% for window_filters in formset.forms %}
+              {% for field in window_filters %}
                 <div id="div_id_{{ field.name }}">
                   <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
                   <div class="mb-1">
@@ -88,8 +89,8 @@
     <script>
       $('#add_more_button').click(function() {
         console.log("clicked");
-        console.log($('#div_id_entity_type-TOTAL_FORMS').val());
-        var form_idx = $('#div_id_entity_type-TOTAL_FORMS').val();
+        console.log($('#div_id_window_filters-TOTAL_FORMS').val());
+        var form_idx = $('#div_id_form-TOTAL_FORMS').val();
         $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
         $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
       });

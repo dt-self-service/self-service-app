@@ -87,5 +87,39 @@ def submit_create(request):
             print ("not ajax")
             return HttpResponseBadRequest("Invalid Call!")
     return HttpResponseBadRequest ("Invalid Protocol")
-            
+
+def fill_maintenance_field(form, window, form_field_name, window_field_name, required=True):
+    if window_field_name in window:
+        form[form_field_name].initial(window[window_field_name])
+        form[form_field_name].disabled = True
+    else:
+        if required:
+            raise Exception ("Required Field Missing!")
+
+def submit_view(request):
+    """Extract Maintenance Window Information"""
+    if request.method == "POST" and request.is_ajax():
+        cluster = request.POST['cluster_name']
+        tenant = request.POST['tenant_name']
+        window_id = request.POST['window_id']
+        window_info = maintenance.get_window (cluster, tenant, window_id)
+
+        form = create_maintenance_window(request.POST)
+        fill_maintenance_field(form, window_info, "window_name", "name")
+        fill_maintenance_field(form, window_info, "window_description", "description")
+        fill_maintenance_field(form, window_info, "window_supression", "suppression")
+        fill_maintenance_field(form, window_info, "window_planned", "type")
+
+    return render(
+            request,
+            'maintenance/submit_view.html',
+            {
+                    'window_details': form
+            }
+    )
+
+        
+
+
+
     

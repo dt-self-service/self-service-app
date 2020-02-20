@@ -13,7 +13,7 @@
       <div class="card-body">
         <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below that correspond with your organization's maintenance window schedule.</p>
       <!-- Name your maintenance window text field--->
-        <form method="POST">
+        <form id="get_window_list" method="POST">
           {% csrf_token %}
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">Configured maintenance windows</legend>
@@ -39,8 +39,8 @@
             <tbody>
                 {% for window in list_of_windows %}
                 <tr>
-                <td> {{ window.name }} </td>
-                <td> {{ window.description }} </td>
+                <td class= "get_window_details"> {{ window.name }} </td>
+                <td class= "get_window_details"> {{ window.description }} </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -127,6 +127,6 @@
       hide_unused_fields();
       $('#id_window_recurrence').on('change', hide_unused_fields);
     </script>
-    <script src="{% static '\admin\js\getTenantFromCluster.js' %}"></script>
-    <script src="{% static '\admin\js\mWindowDetails.js' %}"></script>
+    <script src="{% static '\js\getTenantFromCluster.js' %}"></script>
+    <script src="{% static '\js\mWindowDetails.js' %}"></script>
 {% endblock page_level_additions %}

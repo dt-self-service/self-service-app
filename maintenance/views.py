@@ -6,7 +6,7 @@ from django.shortcuts import render
 from .forms import create_maintenance_window
 from .forms import view_maintenance_window
 from .forms import filter_set
-from packages.config import maintenance
+from dynatrace.tenant import maintenance
 import user_variables as uv
 
 import json # testing purposes

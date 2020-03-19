@@ -5,5 +5,6 @@ urlpatterns = [
     path('create/', views.create, name='create-window'),
     path('view/', views.view, name='view-window'),
     path('submit_create', views.submit_create, name='submit-create-window'),
-    path('submit_view', views.submit_view, name='submit-view-window'),
+    path('get_all_windows', views.get_all_windows, name='submit-get-all-windows'),
+    path('get_window_details', views.get_all_windows, name='submit-get-window-details'),
 ]

@@ -96,7 +96,7 @@ def fill_maintenance_field(form, window, form_field_name, window_field_name, req
         if required:
             raise Exception ("Required Field Missing!")
 
-def submit_view(request):
+def get_window_details(request):
     """Extract Maintenance Window Information"""
     if request.method == "POST" and request.is_ajax():
         cluster = request.POST['cluster_name']
@@ -118,8 +118,11 @@ def submit_view(request):
             }
     )
 
-        
-
-
-
-    
+def get_all_windows(request):
+    if request.method == 'POST' and request.is_ajax():
+        form = view_maintenance_window(request.POST)
+        cluster = uv.FULL_SET[request.POST['cluster_name']]
+        list_of_windows = maintenance.get_windows(cluster, request.POST['tenant_name'])
+        print(list_of_windows)
+        return JsonResponse(list_of_windows)
+    return HttpResponseBadRequest ("Invalid!")

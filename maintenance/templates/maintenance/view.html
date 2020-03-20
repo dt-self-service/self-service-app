@@ -35,6 +35,7 @@
               <tr>
                 <th>Name</th>
                 <th>Description</th>
+                <th>ID</th>
               </tr>
             </thead>
             <tbody id="maintenance_list_body">
@@ -44,17 +45,23 @@
         <div>
           <button id="get_window_details" class="btn btn-success">View Window</button>
         </div>
+        <br/>
         <div id="status_area"></div>
         <div id="view_single_window">
           <form> 
-            <input hidden="true" type="text" id="maintenance_window_name" name="maintenance_window_name" placeholder="Maintenance Window Name" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
-            <input hidden="true" type="text" id="maintenance_window_desc" name="Description" placeholder="Maintenance Window Description" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
-            <input hidden="true" type="text" id="window_plan" name="Description" placeholder="Maintenance Window Planned" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
-            <input hidden="true" type="text" id="window_recurrence" name="Description" placeholder="Maintenance Window Recurrence" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
-            <input hidden="true" type="text" id="window_suppression" name="Description" placeholder="Maintenance Window Suppression" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
-            <input hidden="true" type="text" id="maintenance_start" name="maintenance_start" placeholder="Maintenance Window Start" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
-            <input hidden="true" type="text" id="maintenance_end" name="maintenance_end" placeholder="Maintenance Window End" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
-            <input hidden="true" type="text" id="entity_type" name="maintenance_end" placeholder="Maintenance Window Name" class="form-control col-lg-4 col-sm-12 col-md-8" readonly><br>
+            <input hidden="true" type="text" id="maintenance_window_name" name="maintenance_window_name" placeholder="Maintenance Window Name" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_window_desc" name="Description" placeholder="Maintenance Window Description" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="window_plan" name="Description" placeholder="Maintenance Window Planned" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="window_recurrence" name="Recurrence" placeholder="Maintenance Window Recurrence" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="window_suppression" name="Suppression" placeholder="Maintenance Window Suppression" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_day_of_week" name="maintenance_day_of_week" placeholder="Maintenance Window Day of Week" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_day_of_month" name="maintenance_day_of_month" placeholder="Maintenance Window Day of Month" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_start_time" name="maintenance_start" placeholder="Maintenance Window Start Time" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_duration_minutes" name="maintenance_start" placeholder="Maintenance Window Duration" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_start" name="maintenance_start" placeholder="Maintenance Window Start" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_end" name="maintenance_end" placeholder="Maintenance Window End" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="entity_type" name="maintenance_end" placeholder="Maintenance Window Name" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
+            <input hidden="true" type="text" id="maintenance_zone_id" name="maintenance_zone_id" placeholder="Maintenance Window Timezone" class="form-control col-lg-4 col-sm-12 col-md-8" readonly>
           </form>
         </div>
       </div>

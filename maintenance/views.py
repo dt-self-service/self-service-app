@@ -102,21 +102,10 @@ def get_window_details(request):
         cluster = request.POST['cluster_name']
         tenant = request.POST['tenant_name']
         window_id = request.POST['window_id']
-        window_info = maintenance.get_window (cluster, tenant, window_id)
 
-        form = create_maintenance_window(request.POST)
-        fill_maintenance_field(form, window_info, "window_name", "name")
-        fill_maintenance_field(form, window_info, "window_description", "description")
-        fill_maintenance_field(form, window_info, "window_supression", "suppression")
-        fill_maintenance_field(form, window_info, "window_planned", "type")
-
-    return render(
-            request,
-            'maintenance/submit_view.html',
-            {
-                    'window_details': form
-            }
-    )
+        window_details = maintenance.get_window (uv.FULL_SET[cluster], tenant, window_id)
+        return JsonResponse (window_details)
+    return HttpResponseBadRequest ("Invalid!")
 
 def get_all_windows(request):
     if request.method == 'POST' and request.is_ajax():

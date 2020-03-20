@@ -46,9 +46,8 @@ def submit_create(request):
     """Submit Maintenance Window info to Cluster/Tenant Combo"""
     if request.method == "POST":
         if request.is_ajax():
-            print ("ajax")
             form = create_maintenance_window(request.POST)
-            print(request.POST)
+            # print(request.POST)
             if form.is_valid():
             # scope = maintenance.generate_scope(
             #     management_zone_id=str(request.POST['management_zone_name'])
@@ -112,6 +111,5 @@ def get_all_windows(request):
         form = view_maintenance_window(request.POST)
         cluster = uv.FULL_SET[request.POST['cluster_name']]
         list_of_windows = maintenance.get_windows(cluster, request.POST['tenant_name'])
-        print(list_of_windows)
         return JsonResponse(list_of_windows)
     return HttpResponseBadRequest ("Invalid!")

@@ -1,5 +1,23 @@
 var maintenance_list = $('#dataTable').DataTable();
 
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "2000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "show",
+  "hideMethod": "fadeOut"
+}
+
 const isDict = dict => {
   return typeof dict === "object" && !Array.isArray(dict);
 };
@@ -66,35 +84,19 @@ $("#get_all_windows").on('click', function(e) {
                   maintenance_window['id']
                 ]).draw()
               );
-              var status_field = $('#status_area');
-              status_field.removeClass();
-              status_field.empty();
-
-              status_field.addClass("alert alert-success");
-              status_field.append("<strong>Success!</strong");
+              toastr["success"]("Success!");
 
             },
             error: function(xhr, status, error)
             {
-              alert(xhr.responseText);
-              var status_field = $('#status_area');
-              status_field.removeClass();
-              status_field.empty();
-
-              status_field.addClass("alert alert-danger");
-              status_field.append("<strong>Unable to fetch windows!</strong");
-
+              // alert(xhr.responseText);
+              toastr["error"]("Unable to fetch windows!");
             }
           });
       }
-      else{
-        var status_field = $('#status_area');
-        status_field.removeClass();
-        status_field.empty();
-
-        status_field.addClass("alert alert-danger");
-        status_field.append("<strong>Please Choose a Cluster!</strong");
-      }
+    else{
+      toastr["error"]("Please Choose a Cluster!");
+    }
   });
 
 function populate_details(returned_data){
@@ -127,12 +129,7 @@ function populate_details(returned_data){
           },
           success: function(returned_data)
           {
-            var status_field = $('#status_area')
-            status_field.removeClass()
-            status_field.empty();
-
-            status_field.addClass("alert alert-success")
-            status_field.append("<strong>Success!</strong")
+            toastr["success"]("Success!");
 
             var details_table = $("#details_table").DataTable();
             details_table.clear();
@@ -142,13 +139,7 @@ function populate_details(returned_data){
           },
           error: function(returned_data)
           {
-            var status_field = $('#status_area')
-            status_field.removeClass()
-            status_field.empty();
-
-            status_field.addClass("alert alert-danger")
-            status_field.append("<strong>Unable to fetch windows!</strong")
-
+            toastr["error"]("Unable to fetch windows!");
           }
         });
   });

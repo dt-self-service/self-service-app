@@ -1,5 +1,9 @@
 var maintenance_list = $('#dataTable').DataTable();
 
+const isDict = dict => {
+  return typeof dict === "object" && !Array.isArray(dict);
+};
+
 $(document).ready(function(){
   maintenance_list.destroy();
   maintenance_list = $('#dataTable').DataTable({
@@ -11,6 +15,12 @@ $(document).ready(function(){
         "searchable": false
       }
     ]
+  });
+  var details_table = $("#details_table").DataTable();
+  details_table.destroy();
+  details_table = $("#details_table").DataTable({
+    "ordering": false,
+    "pageLength": 50
   });
 });
 
@@ -33,7 +43,7 @@ function getCookie(name) {
 function insert_value(data_field, textbox_id){
   if (data_field) {
     $("#" + textbox_id).val(data_field);
-    $("#" + textbox_id).removeAttr("hidden");
+    $("#" + textbox_id).attr("hidden", false);
   }
   else {
     $("#" + textbox_id).attr("hidden", true);
@@ -42,8 +52,6 @@ function insert_value(data_field, textbox_id){
 }
 
 $("#get_all_windows").on('click', function(e) {
-    console.log("get all from tenant");
-
     e.preventDefault(); // avoid to execute the actual submit of the form.
     if($("#id_cluster_name").val() !== ""){
 
@@ -100,11 +108,16 @@ $("#get_all_windows").on('click', function(e) {
       }
   });
 
-  $("#get_window_details").on('click', function(e) {
-    console.log("get single");
+function populate_details(returned_data){
+  var details_table = $("#details_table").DataTable();
+  for (var k in returned_data){
+    if (isDict(returned_data[k])){populate_details(returned_data[k]);}
+    else{details_table.row.add([k, returned_data[k]]).draw(false);}
+  }
+}
 
+  $("#get_window_details").on('click', function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
-    console.log(maintenance_list.row(".selected").data()[2]);
     var selected_item = {
       "window_id": maintenance_list.row(".selected").data()[2],
       "cluster_name": $("#id_cluster_name").val(),
@@ -131,30 +144,10 @@ $("#get_all_windows").on('click', function(e) {
 
             status_field.addClass("alert alert-success")
             status_field.append("<strong>Success!</strong")
-            
-            insert_value(returned_data['name'], "maintenance_window_name");
-            insert_value(returned_data['description'], "maintenance_window_desc");
-            insert_value(returned_data['type'], "window_plan");
-            
-            insert_value(returned_data['suppression'], "window_suppression");
-            // insert_value(returned_data['scope'], "maintenance_window_name");
-            insert_value(returned_data['schedule']['recurrenceType'], "window_recurrence");
-            if (returned_data['schedule'].hasOwnProperty("recurrence")){
-              insert_value(returned_data['schedule']['recurrence']['dayOfWeek'], "maintenance_day_of_week");
-              insert_value(returned_data['schedule']['recurrence']['dayOfMonth'], "maintenance_day_of_month");
-              insert_value(returned_data['schedule']['recurrence']['startTime'], "maintenance_start_time");
-              insert_value(returned_data['schedule']['recurrence']['durationMinutes'], "maintenance_duration_minutes");
-            }
-            else {
-              insert_value(undefined, "maintenance_day_of_week");
-              insert_value(undefined, "maintenance_day_of_month");
-              insert_value(undefined, "maintenance_start_time");
-              insert_value(undefined, "maintenance_duration_minutes");
-            }
-            insert_value(returned_data['schedule']['start'], "maintenance_start");
-            insert_value(returned_data['schedule']['end'], "maintenance_end");
-            insert_value(returned_data['schedule']['zoneId'], "maintenance_zone_id");
-            console.log(returned_data);
+
+            var details_table = $("#details_table").DataTable();
+            details_table.clear();
+            populate_details(returned_data);
 
 
           },
@@ -174,17 +167,11 @@ $("#get_all_windows").on('click', function(e) {
 $("#dataTable tbody").on( 'click', 'tr', function () {
   var table = $('#dataTable').DataTable();
   var id = table.row( this ).id();
-  console.log("ID: " + id);
-  console.log("clicked row");
-  // if ($(this).hasClass('selected')) {
-    // $(this).removeClass('selected');
-    // console.log("remove select")
-  // }
+  if ($(this).hasClass('selected')) {
+    $(this).removeClass('selected');
+  }
+  else{
     maintenance_list.$('tr.selected').removeClass('selected');
-  $(this).addClass('selected');
-  console.log("add select");
-  console.log(maintenance_list.rows( { selected: true } ).data());
-  console.log(maintenance_list.rows( { selected: true } ).count())
-  console.log(maintenance_list.row( this ).id())
-
+    $(this).addClass('selected');
+  }
 });

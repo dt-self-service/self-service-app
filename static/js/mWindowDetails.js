@@ -40,17 +40,6 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function insert_value(data_field, textbox_id){
-  if (data_field) {
-    $("#" + textbox_id).val(data_field);
-    $("#" + textbox_id).attr("hidden", false);
-  }
-  else {
-    $("#" + textbox_id).attr("hidden", true);
-  }
-
-}
-
 $("#get_all_windows").on('click', function(e) {
     e.preventDefault(); // avoid to execute the actual submit of the form.
     if($("#id_cluster_name").val() !== ""){
@@ -75,7 +64,7 @@ $("#get_all_windows").on('click', function(e) {
                   maintenance_window['name'],
                   maintenance_window['description'],
                   maintenance_window['id']
-                ]).draw(false)
+                ]).draw()
               );
               var status_field = $('#status_area');
               status_field.removeClass();

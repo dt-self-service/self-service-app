@@ -1,0 +1,4 @@
+table.dataTable tbody tr.selected {
+    color: #FFF;
+    background-color: #2653d4;
+}

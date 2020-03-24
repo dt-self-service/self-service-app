@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 from .forms import create_maintenance_window
 from .forms import view_maintenance_window
+from .forms import update_maintenance_window
 from .forms import filter_set
 from dynatrace.tenant import maintenance
 import user_variables as uv
@@ -39,6 +40,20 @@ def view(request):
             {
                     'form': form,
                     'list_of_windows': list_of_windows["values"]
+            }
+    )
+
+# Create your views here.
+def update(request):
+
+    form = update_maintenance_window()
+    formset = filter_set
+    return render(
+            request,
+            'maintenance/update.html',
+            {
+                    'form': form,
+                    'formset': formset
             }
     )
 

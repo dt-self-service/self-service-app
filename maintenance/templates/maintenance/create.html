@@ -17,7 +17,7 @@
           {% csrf_token %}
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">Create Maintenance Window</legend>
-            {% for field in form %}
+            {% for field in form%}
               <div id="div_id_{{ field.name }}">
                 <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
                 <div class="mb-1">
@@ -28,17 +28,17 @@
             {{ formset.management_form }}
             <div id="form_set">
             {% for window_filters in formset.forms %}
-              <div class="row form-row spacer">
+              <div >
                 {% for field in window_filters %}
-                  <div id="div_id_{{ field.name }}">
+                  <span id="div_id_{{ field.name }}">
                       {{ field }}
-                  </div>
+                  </span>
                 {% endfor %}
               </div>
             {% endfor %}
             </div>
             <div id="empty_form" style="display:none">
-              <div class="row form-row">
+              <div>
                 {{ formset.empty_form }}
               </div>
             </div>

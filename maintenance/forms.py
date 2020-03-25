@@ -126,6 +126,11 @@ AVAILABLE_FILTER_FIELDS = [
         ("VMWARE_DATACENTER", "VMware Datacenter"),
 ]
 
+TAGS_OR_ENTITIES_CHOICE = [
+        ("","Filter Type"),
+        ("TAGS","Tags"),
+        ("ENTITIES","Entities"),
+]
 
 class create_maintenance_window(forms.Form):
     cluster_name = forms.ChoiceField(
@@ -375,15 +380,23 @@ class view_maintenance_window(forms.Form):
     )
 
 class window_filters(forms.Form):
-        
+
         entity_type = forms.ChoiceField(
-                label = "Entity Type",
+                label = "",
                 choices = AVAILABLE_FILTER_FIELDS,
                 widget=forms.Select(
                         attrs={'class': 'btn btn-secondary dropdown-toggle col-lg-2 col-sm-12 col-md-8'}
                 )
         )
+        tags_or_entities = forms.ChoiceField(
+                label = "",
+                choices = TAGS_OR_ENTITIES_CHOICE,
+                widget=forms.Select(
+                        attrs={'class': 'btn btn-secondary dropdown-toggle col-lg-2 col-sm-12 col-md-8'}
+                )
+        )
         filter_value = forms.CharField(
+                label = "",
                 max_length=100,
                 widget=forms.TextInput(
                         attrs={'class': 'form-control col-lg-6 col-sm-12 col-md-8'}

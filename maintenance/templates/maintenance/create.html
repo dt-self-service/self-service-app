@@ -17,7 +17,7 @@
           {% csrf_token %}
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">Create Maintenance Window</legend>
-            {% for field in form%}
+            {% for field in form %}
               <div id="div_id_{{ field.name }}">
                 <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
                 <div class="mb-1">

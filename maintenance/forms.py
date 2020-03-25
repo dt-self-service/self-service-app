@@ -399,7 +399,7 @@ class window_filters(forms.Form):
                 label = "",
                 max_length=100,
                 widget=forms.TextInput(
-                        attrs={'class': 'form-control col-lg-6 col-sm-12 col-md-8'}
+                        attrs={'class': 'form-control col-lg-6 col-sm-12 col-md-8','placeholder': 'Separated By ";"'}
                 )
         )
 

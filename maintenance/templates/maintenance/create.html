@@ -25,29 +25,28 @@
                 </div>
               </div>
             {% endfor %}
-            <div id="form_set">
             {{ formset.management_form }}
+            <div id="form_set">
             {% for window_filters in formset.forms %}
-              {% for field in window_filters %}
-                <div id="div_id_{{ field.name }}">
-                  <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
-                  <div class="mb-1">
-                    {{ field }}
+              <div class="row form-row spacer">
+                {% for field in window_filters %}
+                  <div id="div_id_{{ field.name }}">
+                      {{ field }}
                   </div>
-                </div>
-              {% endfor %}
+                {% endfor %}
+              </div>
             {% endfor %}
             </div>
-            <div class="input-group-append" id="add_more_div">
-              <button type="button" style="margin:5px;" class="btn btn-success add-form-row" id="add_more_button">+</button>
-              <button type="button" style="margin:5px;" class="btn btn-danger del-form-row" id="remove_prev_button">-</button>
-            </div>
             <div id="empty_form" style="display:none">
-              <div>
+              <div class="row form-row">
                 {{ formset.empty_form }}
               </div>
             </div>
           </fieldset>
+          <div class="input-group-append" id="add_more_div">
+            <button type="button" style="margin:5px;" class="btn btn-success add-form-row" id="add_more_button">+</button>
+            <button type="button" style="margin:5px;" class="btn btn-danger del-form-row" id="remove_prev_button">-</button>
+          </div>
           <button type="submit" id="submit_create" class="btn btn-success mb-4">Submit</button>
         </form>
       </div>

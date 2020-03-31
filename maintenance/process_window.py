@@ -10,6 +10,7 @@ def create_filters_from_formset(input_formset, form_prefix="form"):
 
   for entity_entry in input_formset.forms:
     if entity_entry.cleaned_data.get('filter_value') != "":
+
       if entity_entry.cleaned_data.get('tags_or_entities') == "TAGS":
         tag_list = []
         for tag_entry in entity_entry.cleaned_data.get('filter_value').split(';'):
@@ -22,4 +23,9 @@ def create_filters_from_formset(input_formset, form_prefix="form"):
           "tags": tag_list
         }
         scope['matches'].append(match)
+
+      if entity_entry.cleaned_data.get('tags_or_entities') == "ENTITIES":
+        for specific_entity in entity_entry.cleaned_data.get('filter_value').split(';'):
+          scope['entities'].append(specific_entity)
+
   return scope

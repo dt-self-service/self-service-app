@@ -7,6 +7,8 @@ from .forms import create_maintenance_window
 from .forms import view_maintenance_window
 from .forms import update_maintenance_window
 from .forms import filter_set
+from .process_window import create_filters_from_formset
+
 from dynatrace.tenant import maintenance
 import user_variables as uv
 
@@ -64,37 +66,56 @@ def submit_create(request):
             form = create_maintenance_window(request.POST)
             # print(request.POST)
             if form.is_valid():
-            # scope = maintenance.generate_scope(
-            #     management_zone_id=str(request.POST['management_zone_name'])
-            # )
+                #Popping all the args to get strip the information to a valid formset
+                post_args = request.POST.copy()
+                day = None
+                if 'window_day_of_week' in post_args:
+                    day = post_args.pop ('window_day_of_week')
+                if 'window_day_of_month' in post_args:
+                    day = post_args.pop ('window_day_of_month')
 
                 schedule = maintenance.generate_schedule (
-                        request.POST['window_recurrence'],
-                        request.POST['window_start_time'],
-                        request.POST['window_duration'],
-                        request.POST['window_maintenance_start'],
-                        request.POST['window_maintenance_end'],
-                        day= request.POST['window_day_of_week'] \
-                                if request.POST['window_day_of_week'] \
-                                else request.POST['window_day_of_month']
+                        post_args.pop ('window_recurrence')[0],
+                        post_args.pop ('window_start_time')[0],
+                        post_args.pop ('window_duration')[0],
+                        post_args.pop ('window_maintenance_start')[0],
+                        post_args.pop ('window_maintenance_end')[0],
+                        day
                 )
 
+                maintenance_window_name = post_args.pop ('window_name')[0]
+                maintenance_window_desc = post_args.pop ('window_description')[0]
+                maintenance_window_supp = post_args.pop ('window_supression')[0]
+                maintenance_window_plan = post_args.pop ('window_planned')[0]
+                cluster_name = post_args.pop ('cluster_name')[0]
+                tenant_name = post_args.pop ('tenant_name')[0]
+                post_args.pop('csrfmiddlewaretoken')
+                
+                formset = filter_set(post_args)
+                scope = None
+                print("Formset: " + str(formset.is_valid()))
+                if formset.is_valid():
+                    scope = create_filters_from_formset (formset)
+
                 payload = maintenance.generate_window_json (
-                        request.POST['window_name'],
-                        request.POST['window_description'],
-                        request.POST['window_supression'],
+                        maintenance_window_name,
+                        maintenance_window_desc,
+                        maintenance_window_supp,
                         schedule,
-                        is_planned=request.POST['window_planned']
+                        is_planned=maintenance_window_plan,
+                        scope=scope
                 )
+
                 try:
                     new_window = maintenance.create_window(
-                            uv.FULL_SET[request.POST['cluster_name']],
-                            request.POST['tenant_name'],
+                            uv.FULL_SET[cluster_name],
+                            tenant_name,
                             payload
                     )
                     return JsonResponse (new_window, safe=False)
                 except Exception as e:
                     print (e)
+                    # return HttpResponseBadRequest(e)
             else:
                 print("Invalid Form!")
                 return HttpResponseBadRequest("Invalid Form!")

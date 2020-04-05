@@ -56,6 +56,15 @@
             </tbody>
             </table>
         </div>
+        <div>
+          <form id="update_window_details" method="POST">
+            {% csrf_token %}
+            <button type=submit id="update_window_details" class="btn btn-warning">Update Window</button>
+          </form>
+          <form id="delete_window" method="POST">
+            {% csrf_token %}
+            <button type=submit id="delete_window" class="btn btn-danger confirmModal">Delete Window</button>
+          </form>
       </div>
     </div>
   </div>
@@ -105,4 +114,5 @@
     </script>
     <script src="{% static '\js\maintenance_window_shared.js' %}"></script>
     <script src="{% static '\js\maintenance_window_view.js' %}"></script>
+    <script src="{% static '\js\jquery.confirmModal.min.js' %}"></script>
 {% endblock page_level_additions %}

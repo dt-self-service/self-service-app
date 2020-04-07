@@ -144,6 +144,88 @@ function populate_details(returned_data){
         });
   });
 
+  // Update function re-directs to the Update page and sends the data 
+  $("#update_window_details").on('click', function(e) {
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var selected_item = {
+      "window_id": maintenance_list.row(".selected").data()[2],
+      "cluster_name": $("#id_cluster_name").val(),
+      "tenant_name":  $("#id_tenant_name").val()
+    }
+
+    var form = $('#view_window');
+    var url = form.attr('action');
+    var csrftoken = getCookie("csrftoken");
+    $.ajax({
+          type: "POST",
+          url: "/maintenance/update",
+          data: selected_item, // serializes the form's elements.
+          dataType: "json",
+          headers: {
+            "X-CSRFToken": csrftoken
+          },
+          success: function(returned_data)
+          {
+            toastr["success"]("Success!");
+
+            var details_table = $("#details_table").DataTable();
+            details_table.clear();
+            populate_details(returned_data);
+
+
+          },
+          error: function(returned_data)
+          {
+            toastr["error"]("Unable to fetch windows!");
+          }
+        });
+  });
+
+// Delete page will prompt ARE YOU SURE? this will be an AJAX delete call (same page) 
+$("#delete_window").on('click', function(e) {
+  console.log("Delete button was clicked")
+  e.preventDefault(); // avoid to execute the actual submit of the form.
+  $('.confirmModal').click(function(e) {
+    e.preventDefault();              
+    $.confirmModal('Are you sure to delete this?', function(el) {
+      console.log("Ok was clicked!")
+      //do delete operation
+      var selected_item = {
+        "window_id": maintenance_list.row(".selected").data()[2],
+        "cluster_name": $("#id_cluster_name").val(),
+        "tenant_name":  $("#id_tenant_name").val()
+      }
+    
+      var form = $('#delete_window');
+      var url = form.attr('action');
+      var csrftoken = getCookie("csrftoken");
+      $.ajax({
+            type: "POST",
+            url: "/maintenance/delete_window",
+            data: selected_item, // serializes the form's elements.
+            dataType: "json",
+            headers: {
+              "X-CSRFToken": csrftoken
+            },
+            success: function(returned_data)
+            {
+              toastr["success"]("Maintenance Window successfully deleted!");
+    
+              var details_table = $("#details_table").DataTable();
+              details_table.clear();
+              populate_details(returned_data);
+    
+    
+            },
+            error: function(returned_data)
+            {
+              toastr["error"]("Unable to fetch windows!");
+            }
+          });
+    });
+  });   
+});
+
 $("#dataTable tbody").on( 'click', 'tr', function () {
   var table = $('#dataTable').DataTable();
   var id = table.row( this ).id();

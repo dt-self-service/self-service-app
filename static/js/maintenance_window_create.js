@@ -47,6 +47,14 @@ $('#add_more_button').click(function() {
   $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
 });
 
+$('#remove_prev_button').click(function() {
+  var form_idx = $('#id_form-TOTAL_FORMS').val();
+  if (form_idx >= 1){
+    $('#form_set').children().last().remove();
+    $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) - 1);
+  }
+});
+
 function getCookie(name) {
   var cookieValue = null;
   if (document.cookie && document.cookie !== '') {

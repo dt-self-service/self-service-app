@@ -42,11 +42,18 @@ hide_unused_fields();
 $('#id_window_recurrence').on('change', hide_unused_fields);
 
 $('#add_more_button').click(function() {
-  console.log("clicked");
-  console.log($('#div_id_window_filters-TOTAL_FORMS').val());
-  var form_idx = $('#div_id_form-TOTAL_FORMS').val();
+  var form_idx = $('#id_form-TOTAL_FORMS').val();
   $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
   $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+});
+
+
+$('#remove_prev_button').click(function() {
+  var form_idx = $('#id_form-TOTAL_FORMS').val();
+  if (form_idx >= 1){
+    $('#form_set').children().last().remove();
+    $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) - 1);
+  }
 });
 
 function getCookie(name) {

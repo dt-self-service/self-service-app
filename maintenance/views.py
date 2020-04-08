@@ -1,6 +1,4 @@
 from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from django.http import HttpResponseForbidden
 from django.http import HttpResponseBadRequest
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -70,7 +68,8 @@ def update(request):
       }
   )
 
-def delete (request):
+
+def delete(request):
   """Delete AJAX for Maintenance Window"""
   is_general_user(request)
   if request.method == "POST" and request.is_ajax():
@@ -78,7 +77,8 @@ def delete (request):
     tenant = request.POST['tenant_name']
     window_id = request.POST['window_id']
 
-    window_details = maintenance.delete_window(uv.FULL_SET[cluster], tenant, window_id)
+    window_details = maintenance.delete_window(
+        uv.FULL_SET[cluster], tenant, window_id)
     if window_details == 204:
       return HttpResponse("Success")
   return HttpResponseBadRequest("Invalid!")
@@ -149,6 +149,7 @@ def submit_update(request):
       print("not ajax")
       return HttpResponseBadRequest("Invalid Call!")
   return HttpResponseBadRequest("Invalid Protocol")
+
 
 def get_window_details(request):
   """Extract Maintenance Window Information"""

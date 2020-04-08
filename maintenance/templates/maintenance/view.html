@@ -2,117 +2,124 @@
 {% block title %}Create Maintenance Window{% endblock title %}
 {% block content %}
 {% load static %}
-  <div class="container-fluid">
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
-    <!-- Basic Card Example -->
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">View Windows</h6>
-      </div>
-      <div class="card-body">
-        <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below that correspond with your organization's maintenance window schedule.</p>
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
+  <!-- Basic Card Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">View Windows</h6>
+    </div>
+    <div class="card-body">
+      <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team
+        can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having
+        Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below
+        that correspond with your organization's maintenance window schedule.</p>
       <!-- Name your maintenance window text field--->
-        <form id="get_window_list" method="POST">
+      <form id="get_window_list" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Configured maintenance windows</legend>
+          {% for field in form%}
+          <div id="div_id_{{ field.name }}">
+            <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
+            <div class="mb-1">
+              {{ field }}
+            </div>
+          </div>
+          {% endfor %}
+        </fieldset>
+        <button type="submit" id="get_all_windows" class="btn btn-success">View Tenant</button>
+      </form>
+      <br />
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered dt-responsive nowrap" id="dataTable" width="100%"
+          cellspacing="0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>ID</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <button id="get_window_details" class="btn btn-success">View Window</button>
+      </div>
+      <br />
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered dt-responsive nowrap" id="details_table" width="100%"
+          cellspacing="0">
+          <thead>
+            <th>Field</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <form id="update_window_details" method="POST">
           {% csrf_token %}
-          <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Configured maintenance windows</legend>
-            {% for field in form%}
-              <div id="div_id_{{ field.name }}">
-                <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
-                <div class="mb-1">
-                  {{ field }}
-                </div>
-              </div>
-            {% endfor %}
-          </fieldset>
-          <button type="submit" id="get_all_windows"class="btn btn-success">View Tenant</button>
+          <button type=submit id="update_window_details" class="btn btn-warning">Update Window</button>
         </form>
-        <br/>
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered dt-responsive nowrap" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>ID</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            </table>
-        </div>
-        <div>
-          <button id="get_window_details" class="btn btn-success">View Window</button>
-        </div>
-        <br/>
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered dt-responsive nowrap" id="details_table" width="100%" cellspacing="0">
-            <thead>
-              <th>Field</th>
-              <th>Value</th>
-            </thead>
-            <tbody>
-            </tbody>
-            </table>
-        </div>
-        <div>
-          <form id="update_window_details" method="POST">
-            {% csrf_token %}
-            <button type=submit id="update_window_details" class="btn btn-warning">Update Window</button>
-          </form>
-          <form id="delete_window" method="POST">
-            {% csrf_token %}
-            <button type=submit id="delete_window" class="btn btn-danger confirmModal">Delete Window</button>
-          </form>
+        <form id="delete_window" method="POST">
+          {% csrf_token %}
+          <button type=submit id="delete_window" class="btn btn-danger confirmModal">Delete Window</button>
+        </form>
       </div>
     </div>
   </div>
-{% endblock content %}
+  {% endblock content %}
 
-{% block page_level_additions %}
-    <!-- Page level plugins -->
-    <!-- <script src ="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/maintenance_view.css' %}">
-    <!-- Page level custom scripts -->
-    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-    <script>
-      $( document ).ready(function() {
-        //$( '#collapseTwo' ).addClass("show");
-        $( '#nav-maintenance' ).addClass("active");
-        $( '#nav-maintenance-view' ).addClass("active");
-        
-      })
-    </script>
-    <script>
-      conditional_day_of_week = $("#div_id_window_day_of_week")
-      conditional_day_of_month = $("#div_id_window_day_of_month")
-      conditional_start_time = $("#div_id_window_start_time")
-      conditional_duration = $("#div_id_window_duration")
+  {% block page_level_additions %}
+  <!-- Page level plugins -->
+  <!-- <script src ="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/maintenance_view.css' %}">
+  <!-- Page level custom scripts -->
+  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+  <script>
+    $(document).ready(function () {
+      //$( '#collapseTwo' ).addClass("show");
+      $('#nav-maintenance').addClass("active");
+      $('#nav-maintenance-view').addClass("active");
 
-      function hide_unused_fields(){
-        ($('#id_window_recurrence').val() === "WEEKLY") ? conditional_day_of_week.show() : conditional_day_of_week.hide();
-        ($('#id_window_recurrence').val() === "MONTHLY") ? conditional_day_of_month.show() : conditional_day_of_month.hide();
-        if ($('#id_window_recurrence').val() !== "ONCE") {
-          conditional_start_time.show(); 
-          conditional_duration.show(); 
-        } else {
-          conditional_start_time.hide(); 
-          conditional_duration.hide(); 
-        }
+    })
+  </script>
+  <script>
+    conditional_day_of_week = $("#div_id_window_day_of_week")
+    conditional_day_of_month = $("#div_id_window_day_of_month")
+    conditional_start_time = $("#div_id_window_start_time")
+    conditional_duration = $("#div_id_window_duration")
+
+    function hide_unused_fields() {
+      ($('#id_window_recurrence').val() === "WEEKLY") ? conditional_day_of_week.show(): conditional_day_of_week.hide();
+      ($('#id_window_recurrence').val() === "MONTHLY") ? conditional_day_of_month.show(): conditional_day_of_month
+      .hide();
+      if ($('#id_window_recurrence').val() !== "ONCE") {
+        conditional_start_time.show();
+        conditional_duration.show();
+      } else {
+        conditional_start_time.hide();
+        conditional_duration.hide();
       }
-      hide_unused_fields();
-      $('#id_window_recurrence').on('change', hide_unused_fields);
-    </script>
-    <script src="{% static '\js\maintenance_window_shared.js' %}"></script>
-    <script src="{% static '\js\maintenance_window_view.js' %}"></script>
-    <script src="{% static '\js\jquery.confirmModal.min.js' %}"></script>
-{% endblock page_level_additions %}
+    }
+    hide_unused_fields();
+    $('#id_window_recurrence').on('change', hide_unused_fields);
+  </script>
+  <script src="{% static '\js\maintenance_window_shared.js' %}"></script>
+  <script src="{% static '\js\maintenance_window_view.js' %}"></script>
+  <script src="{% static '\js\jquery.confirmModal.min.js' %}"></script>
+  {% endblock page_level_additions %}

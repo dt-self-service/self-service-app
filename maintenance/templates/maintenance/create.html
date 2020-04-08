@@ -2,56 +2,60 @@
 {% block title %}Create Maintenance Window{% endblock title %}
 {% block content %}
 {% load static %}
-  <div class="container-fluid">
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
-    <!-- Basic Card Example -->
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Configuration</h6>
-      </div>
-      <div class="card-body">
-        <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below that correspond with your organization's maintenance window schedule.</p>
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">Maintenance Windows</h1>
+  <!-- Basic Card Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Configuration</h6>
+    </div>
+    <div class="card-body">
+      <p>Maintenance windows are typically planned, recurring periods of system downtime during which your DevOps team
+        can perform preventative maintenance and system upgrades outside of peak traffic hours. To avoid having
+        Dynatrace report on any performance anomalies that may result from such events, set up maintenance windows below
+        that correspond with your organization's maintenance window schedule.</p>
       <!-- Name your maintenance window text field--->
-        <form id="create_form" method="POST">
-          {% csrf_token %}
-          <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Create Maintenance Window</legend>
-            {% for field in form%}
-              <div id="div_id_{{ field.name }}">
-                <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
-                <div class="mb-1">
-                  {{ field }}
-                </div>
-              </div>
-            {% endfor %}
-            {{ formset.management_form }}
-            <div id="form_set">
-            {% for window_filters in formset.forms %}
-              <div >
-                {% for field in window_filters %}
-                  <span id="div_id_{{ field.name }}">
-                      {{ field }}
-                  </span>
-                {% endfor %}
-              </div>
-            {% endfor %}
+      <form id="create_form" method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Create Maintenance Window</legend>
+          {% for field in form%}
+          <div id="div_id_{{ field.name }}">
+            <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
+            <div class="mb-1">
+              {{ field }}
             </div>
-            <div id="empty_form" style="display:none">
-              <div>
-                {{ formset.empty_form }}
-              </div>
-            </div>
-          </fieldset>
-          <div class="input-group-append" id="add_more_div">
-            <button type="button" style="margin:5px;" class="btn btn-success add-form-row" id="add_more_button">+</button>
-            <button type="button" style="margin:5px;" class="btn btn-danger del-form-row" id="remove_prev_button">-</button>
           </div>
-          <button type="submit" id="submit_create" class="btn btn-success mb-4">Submit</button>
-        </form>
-      </div>
+          {% endfor %}
+          {{ formset.management_form }}
+          <div id="form_set">
+            {% for window_filters in formset.forms %}
+            <div>
+              {% for field in window_filters %}
+              <span id="div_id_{{ field.name }}">
+                {{ field }}
+              </span>
+              {% endfor %}
+            </div>
+            {% endfor %}
+          </div>
+          <div id="empty_form" style="display:none">
+            <div>
+              {{ formset.empty_form }}
+            </div>
+          </div>
+        </fieldset>
+        <div class="input-group-append" id="add_more_div">
+          <button type="button" style="margin:5px;" class="btn btn-success add-form-row" id="add_more_button">+</button>
+          <button type="button" style="margin:5px;" class="btn btn-danger del-form-row"
+            id="remove_prev_button">-</button>
+        </div>
+        <button type="submit" id="submit_create" class="btn btn-success mb-4">Submit</button>
+      </form>
     </div>
   </div>
+</div>
 {% endblock content %}
 
 {% block page_level_additions %}

@@ -1,4 +1,5 @@
 from dynatrace.tenant import maintenance
+from .forms import filter_set
 import user_variables as uv
 
 def create_filters_from_formset(input_formset, form_prefix="form"):
@@ -29,3 +30,44 @@ def create_filters_from_formset(input_formset, form_prefix="form"):
           scope['entities'].append(specific_entity)
 
   return scope
+
+def parse_submit_form(post_args):
+
+  day = None
+  if 'window_day_of_week' in post_args and post_args['window_recurrence'] == 'WEEKLY':
+      day = post_args.pop ('window_day_of_week')[0]
+  if 'window_day_of_month' in post_args and post_args['window_recurrence'] == 'MONTHLY':
+      day = post_args.pop ('window_day_of_month')[0]
+  
+  schedule = maintenance.generate_schedule (
+          post_args.pop ('window_recurrence')[0],
+          post_args.pop ('window_start_time')[0],
+          post_args.pop ('window_duration')[0],
+          post_args.pop ('window_maintenance_start')[0],
+          post_args.pop ('window_maintenance_end')[0],
+          day
+  )
+
+  maintenance_window_name = post_args.pop ('window_name')[0]
+  maintenance_window_desc = post_args.pop ('window_description')[0]
+  maintenance_window_supp = post_args.pop ('window_supression')[0]
+  maintenance_window_plan = post_args.pop ('window_planned')[0]
+  post_args.pop ('cluster_name')[0]
+  post_args.pop ('tenant_name')[0]
+  post_args.pop('csrfmiddlewaretoken')
+  
+  formset = filter_set(post_args)
+  scope = None
+  print("Formset: " + str(formset.is_valid()))
+  if formset.is_valid():
+      scope = create_filters_from_formset (formset)
+
+  payload = maintenance.generate_window_json (
+          maintenance_window_name,
+          maintenance_window_desc,
+          maintenance_window_supp,
+          schedule,
+          is_planned=maintenance_window_plan,
+          scope=scope
+  )
+  return payload

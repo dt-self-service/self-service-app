@@ -81,7 +81,7 @@ $("#get_all_windows").on('click', function (e) {
             maintenance_window['id']
           ]).draw()
         );
-        toastr["success"]("Success!");
+        toastr["success"]("Fetched windows successfully!");
 
       },
       error: function (xhr, status, error) {
@@ -126,7 +126,7 @@ $("#get_window_details").on('click', function (e) {
       "X-CSRFToken": csrftoken
     },
     success: function (returned_data) {
-      toastr["success"]("Success!");
+      toastr["success"]("Fetched window details successfully!");
 
       var details_table = $("#details_table").DataTable();
       details_table.clear();

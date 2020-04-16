@@ -30,6 +30,7 @@ def create_filters_from_formset(input_formset, form_prefix="form"):
         for specific_entity in entity_entry.cleaned_data.get('filter_value').split(';'):
           scope['entities'].append(specific_entity)
 
+  # print (scope)
   return scope
 
 
@@ -60,7 +61,7 @@ def parse_submit_form(post_args):
 
   formset = filter_set(post_args)
   scope = None
-  print("Formset: " + str(formset.is_valid()))
+  # print("Formset: " + str(formset.is_valid()))
   if formset.is_valid():
     scope = create_filters_from_formset(formset)
 
@@ -72,4 +73,5 @@ def parse_submit_form(post_args):
       is_planned=maintenance_window_plan,
       scope=scope
   )
+  # print (payload)
   return payload

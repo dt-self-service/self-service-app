@@ -90,7 +90,6 @@ def submit_create(request):
   if request.method == "POST":
     if request.is_ajax():
       form = create_maintenance_window(request.POST)
-      # print(request.POST)
       if form.is_valid():
         # Popping all the args to get strip the information to a valid formset
 
@@ -99,7 +98,6 @@ def submit_create(request):
         payload = parse_submit_form(request.POST.copy())
 
         try:
-          print(payload)
           new_window = maintenance.create_window(
               uv.FULL_SET[cluster_name],
               tenant_name,

@@ -11,6 +11,7 @@ autopep8 = "*"
 django-admin = "*"
 django = "*"
 requests = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.8"

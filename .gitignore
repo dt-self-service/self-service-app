@@ -122,3 +122,5 @@ dmypy.json
 
 .vscode/
 .env
+
+dynatrace_admin/settings.py

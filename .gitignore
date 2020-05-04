@@ -124,3 +124,8 @@ dmypy.json
 .env
 
 dynatrace_admin/settings.py
+saml/advanced_settings.json
+saml/settings.json
+saml/certs
+
+!saml/certs/README

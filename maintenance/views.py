@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import JsonResponse
 from django.shortcuts import render
-from auth.validate import is_member_of_group
+from sso.validate import is_member_of_group
 
 from .forms import create_maintenance_window
 from .forms import view_maintenance_window
@@ -18,7 +18,7 @@ import user_variables as uv
 
 
 def create(request):
-  is_member_of_group(request, 'Maintenance Writer')
+  # is_member_of_group(request, 'Maintenance Writer')
   form = create_maintenance_window()
   formset = filter_set
   return render(
@@ -32,7 +32,7 @@ def create(request):
 
 
 def view(request):
-  is_member_of_group(request, 'Maintenance Viewer')
+  # is_member_of_group(request, 'Maintenance Viewer')
   if request.method == "POST":
     form = view_maintenance_window(request.POST)
     cluster = uv.FULL_SET[request.POST['cluster_name']]
@@ -56,7 +56,7 @@ def view(request):
 
 def update(request):
   """Update Page for Maintenance Window"""
-  is_member_of_group(request, 'Maintenance Writer')
+  # is_member_of_group(request, 'Maintenance Writer')
   form = update_maintenance_window()
   formset = filter_set
   return render(
@@ -71,7 +71,7 @@ def update(request):
 
 def delete(request):
   """Delete AJAX for Maintenance Window"""
-  is_member_of_group(request, 'Maintenance Writer')
+  # is_member_of_group(request, 'Maintenance Writer')
   if request.method == "POST" and request.is_ajax():
     cluster = request.POST['cluster_name']
     tenant = request.POST['tenant_name']
@@ -86,7 +86,7 @@ def delete(request):
 
 def submit_create(request):
   """Submit Maintenance Window info to Cluster/Tenant Combo"""
-  is_member_of_group(request, 'Maintenance Writer')
+  # is_member_of_group(request, 'Maintenance Writer')
   if request.method == "POST":
     if request.is_ajax():
       form = create_maintenance_window(request.POST)
@@ -117,7 +117,7 @@ def submit_create(request):
 
 def submit_update(request):
   """Submit Maintenance Window info to Cluster/Tenant Combo"""
-  is_member_of_group(request, 'Maintenance Writer')
+  # is_member_of_group(request, 'Maintenance Writer')
   if request.method == "POST":
     if request.is_ajax():
       form = create_maintenance_window(request.POST)
@@ -151,7 +151,7 @@ def submit_update(request):
 
 def get_window_details(request):
   """Extract Maintenance Window Information"""
-  is_member_of_group(request, 'Maintenance Writer')
+  # is_member_of_group(request, 'Maintenance Writer')
   if request.method == "POST" and request.is_ajax():
     cluster = request.POST['cluster_name']
     tenant = request.POST['tenant_name']
@@ -164,7 +164,7 @@ def get_window_details(request):
 
 
 def get_all_windows(request):
-  is_member_of_group(request, 'Maintenance Writer')
+  # is_member_of_group(request, 'Maintenance Writer')
   if request.method == 'POST' and request.is_ajax():
     # form = view_maintenance_window(request.POST)
     cluster = uv.FULL_SET[request.POST['cluster_name']]

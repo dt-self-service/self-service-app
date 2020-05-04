@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'sso.apps.SSOConfig',
     'dashboard.apps.DashboardConfig',
     'maintenance.apps.MaintenanceConfig',
     'django.contrib.admin',
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'sso.middleware.SamlAuth',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -123,6 +125,9 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.join(os.getcwd(), 'static')
 ]
+
+SAML_FOLDER = os.path.join(BASE_DIR, 'saml')
+
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 EMAIL_HOST = "SMTP URL"

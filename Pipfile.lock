@@ -212,7 +212,7 @@
             "hashes": [
                 "sha256:e573c0172174973223d874ffd158ecd4e0faa761015474385289a6468dd29ed6"
             ],
-            "version": "==1.3.6.post2"
+            "version": "==1.3.3"
         }
     },
     "develop": {

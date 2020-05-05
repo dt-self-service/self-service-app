@@ -10,19 +10,16 @@ class SamlAuth:
     self.get_response = get_response
 
   def __call__(self, request):
+    # Group information can be retreived from request.session['samlUserdata']['member']
     if 'samlNameId' in request.session:
-      print ("SAML NameID: " + str(request.session['samlNameId']))
+      pass
     elif request.user.is_authenticated:
-      print ("Local User")
+      pass
     elif self.is_login_required(request.META['PATH_INFO']):
       print ("Login required")
       return HttpResponseRedirect("/accounts/login/")
     else:
-      print ("Not Logged In")
-      print ("Request URL: " + str(request.META['PATH_INFO']))
-      # print ("SAML UserData: " + str(request.session['samlUserdata']))
-      # print ("SAML SessionIndex: " + str(request.session['samlSessionIndex']))
-      # print ("Session: " + str(request.session.items()))
+      pass
       
     
     response = self.get_response(request)

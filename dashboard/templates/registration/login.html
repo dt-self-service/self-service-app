@@ -20,23 +20,32 @@
       <h6 class="m-0 font-weight-bold text-primary">Login</h6>
     </div>
     <div class="card-body">
-      <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <table>
-          <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-          </tr>
-          <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-          </tr>
-        </table>
-        <input type="submit" value="Login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-      </form>
+      <div class="row">
+        <div class="col-md-6">
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <table>
+              <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+              </tr>
+              <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+              </tr>
+            </table>
+            <input type="submit" value="Login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+          </form>
+        </div>
+        <div class="col-md-6" style="border-left: thin solid #5a5c69;">
+          <a href="/sso/?sso2" style="display:flex; justify-content: left; padding: 5%;"><button class="btn btn-primary">Login with SSO</button></a>
+        </div>
+      </div>
       {# Assumes you setup the password_reset view in your URLconf #}
       <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+      <br/>
+      
     </div>
   </div>
   

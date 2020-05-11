@@ -35,6 +35,8 @@ def prepare_django_request(request):
     result['https'] = request.META['HTTP_X_FORWARDED_PROTO']
   if 'HTTP_X_FORWARDED_PORT' in request.META:
     result['server_port'] = request.META['HTTP_X_FORWARDED_PORT']
+  if 'HTTP_X_FORWARDED_DOMAIN' in request.META:
+    result['server_port'] = request.META['HTTP_X_FORWARDED_DOMAIN']
   return result
 
 @csrf_exempt

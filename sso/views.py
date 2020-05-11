@@ -30,6 +30,11 @@ def prepare_django_request(request):
       # 'lowercase_urlencoding': True,
       'post_data': request.POST.copy()
   }
+  #When Running behind a Proxy, the App needs to be passed this info and adapt
+  if 'HTTP_X_FORWARDED_PROTO' in request.META:
+    result['https'] = request.META['HTTP_X_FORWARDED_PROTO']
+  if 'HTTP_X_FORWARDED_PORT' in request.META:
+    result['server_port'] = request.META['HTTP_X_FORWARDED_PORT']
   return result
 
 @csrf_exempt

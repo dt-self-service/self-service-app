@@ -72,7 +72,7 @@ function getCookie(name) {
   return cookieValue;
 }
 
-$("#submit_create").on('click', function (e) {
+$("#submit_update").on('click', function (e) {
 
   e.preventDefault(); // avoid to execute the actual submit of the form.
 
@@ -81,7 +81,7 @@ $("#submit_create").on('click', function (e) {
   var csrftoken = getCookie("csrftoken");
   $.ajax({
     type: "POST",
-    url: "/maintenance/submit_create",
+    url: "/maintenance/submit_update",
     data: form.serialize(), // serializes the form's elements.
     headers: {
       "X-CSRFToken": csrftoken

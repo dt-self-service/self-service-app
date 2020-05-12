@@ -88,30 +88,27 @@ def submit_create(request):
   """Submit Maintenance Window info to Cluster/Tenant Combo"""
   # is_member_of_group(request, 'Maintenance Writer')
   if request.method == "POST":
-    if request.is_ajax():
-      form = create_maintenance_window(request.POST)
-      if form.is_valid():
-        # Popping all the args to get strip the information to a valid formset
+    form = create_maintenance_window(request.POST)
+    if form.is_valid():
+      # Popping all the args to get strip the information to a valid formset
 
-        cluster_name = request.POST['cluster_name']
-        tenant_name = request.POST['tenant_name']
-        payload = parse_submit_form(request.POST.copy())
+      cluster_name = request.POST['cluster_name']
+      tenant_name = request.POST['tenant_name']
+      payload = parse_submit_form(request.POST.copy())
 
-        try:
-          new_window = maintenance.create_window(
-              uv.FULL_SET[cluster_name],
-              tenant_name,
-              payload
-          )
-          return JsonResponse(new_window, safe=False)
-        except Exception as e:
-          print(e)
-          # return HttpResponseBadRequest(e)
-      else:
-        print("Invalid Form!")
-        return HttpResponseBadRequest("Invalid Form!")
-      print("not ajax")
-      return HttpResponseBadRequest("Invalid Call!")
+      try:
+        new_window = maintenance.create_window(
+            uv.FULL_SET[cluster_name],
+            tenant_name,
+            payload
+        )
+        return JsonResponse(new_window, safe=False)
+      except Exception as e:
+        print(e)
+        # return HttpResponseBadRequest(e)
+    else:
+      print("Invalid Form!")
+      return HttpResponseBadRequest("Invalid Form!")
   return HttpResponseBadRequest("Invalid Protocol")
 
 
@@ -119,40 +116,37 @@ def submit_update(request):
   """Submit Maintenance Window info to Cluster/Tenant Combo"""
   # is_member_of_group(request, 'Maintenance Writer')
   if request.method == "POST":
-    if request.is_ajax():
-      form = create_maintenance_window(request.POST)
-      # print(request.POST)
-      if form.is_valid():
-        # Popping all the args to get strip the information to a valid formset
-
-        post_data = request.POST.copy()
-        post_data.pop['maintenance_window_id']
-        cluster_name = request.POST['cluster_name']
-        tenant_name = request.POST['tenant_name']
-        payload = parse_submit_form(post_data)
-        try:
-          print(payload)
-          new_window = maintenance.create_window(
-              uv.FULL_SET[cluster_name],
-              tenant_name,
-              payload
-          )
-          return JsonResponse(new_window, safe=False)
-        except Exception as e:
-          print(e)
-          # return HttpResponseBadRequest(e)
-      else:
-        print("Invalid Form!")
-        return HttpResponseBadRequest("Invalid Form!")
-      print("not ajax")
-      return HttpResponseBadRequest("Invalid Call!")
+    form = update_maintenance_window(request.POST)
+    # print(request.POST)
+    if form.is_valid():
+      # Popping all the args to get strip the information to a valid formset
+      post_data = request.POST.copy()
+      mw_id = post_data.pop('maintenance_window_id')
+      cluster_name = request.POST['cluster_name']
+      tenant_name = request.POST['tenant_name']
+      payload = parse_submit_form(post_data)
+      try:
+        #print(payload)
+        update_window = maintenance.update_window(
+            uv.FULL_SET[cluster_name],
+            tenant_name,
+            mw_id,
+            payload
+        )
+        return JsonResponse(update_window, safe=False)
+      except Exception as e:
+        print(e)
+        # return HttpResponseBadRequest(e)
+    else:
+      print("Invalid Form!")
+      return HttpResponseBadRequest("Invalid Form!")
   return HttpResponseBadRequest("Invalid Protocol")
 
 
 def get_window_details(request):
   """Extract Maintenance Window Information"""
   # is_member_of_group(request, 'Maintenance Writer')
-  if request.method == "POST" and request.is_ajax():
+  if request.method == "POST":
     cluster = request.POST['cluster_name']
     tenant = request.POST['tenant_name']
     window_id = request.POST['window_id']
@@ -165,9 +159,10 @@ def get_window_details(request):
 
 def get_all_windows(request):
   # is_member_of_group(request, 'Maintenance Writer')
-  if request.method == 'POST' and request.is_ajax():
+  if request.method == 'POST':
     # form = view_maintenance_window(request.POST)
     cluster = uv.FULL_SET[request.POST['cluster_name']]
+    
     list_of_windows = maintenance.get_windows(
         cluster, request.POST['tenant_name'])
     return JsonResponse(list_of_windows)

@@ -73,10 +73,9 @@ function getCookie(name) {
 }
 
 $("#submit_update").on('click', function (e) {
-
   e.preventDefault(); // avoid to execute the actual submit of the form.
 
-  var form = $('#create_form');
+  var form = $('#update_form');
   var url = form.attr('action');
   var csrftoken = getCookie("csrftoken");
   $.ajax({
@@ -87,7 +86,7 @@ $("#submit_update").on('click', function (e) {
       "X-CSRFToken": csrftoken
     },
     success: function (data) {
-      toastr["success"]("Maintenance Window Created!");
+      toastr["success"]("Maintenance Window Updated!");
 
     },
     error: function (data) {

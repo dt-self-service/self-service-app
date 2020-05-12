@@ -121,7 +121,7 @@ def submit_update(request):
     if form.is_valid():
       # Popping all the args to get strip the information to a valid formset
       post_data = request.POST.copy()
-      mw_id = post_data.pop('maintenance_window_id')
+      window_id = post_data.pop('window_id')[0]
       cluster_name = request.POST['cluster_name']
       tenant_name = request.POST['tenant_name']
       payload = parse_submit_form(post_data)
@@ -130,7 +130,7 @@ def submit_update(request):
         update_window = maintenance.update_window(
             uv.FULL_SET[cluster_name],
             tenant_name,
-            mw_id,
+            window_id,
             payload
         )
         return JsonResponse(update_window, safe=False)

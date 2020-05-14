@@ -72,7 +72,7 @@ def update(request):
 def delete(request):
   """Delete AJAX for Maintenance Window"""
   # is_member_of_group(request, 'Maintenance Writer')
-  if request.method == "POST":
+  if request.method == "POST" and request.is_ajax():
     cluster = request.POST['cluster_name']
     tenant = request.POST['tenant_name']
     window_id = request.POST['window_id']

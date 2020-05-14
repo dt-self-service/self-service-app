@@ -40,3 +40,6 @@ class MaintenanceTests(TestCase):
     
     expected_payload = {'name': 'Window rando', 'description': 'test', 'suppression': 'DETECT_PROBLEMS_AND_ALERT', 'schedule': {'recurrenceType': 'ONCE', 'start': '2020-09-09 11:00', 'end': '2020-09-09 11:30', 'zoneId': 'America/Toronto'}, 'type': 'PLANNED', 'scope': {'entities': [], 'matches': [{'type': 'OS', 'managementZoneId': 'null', 'tags': [{'context': 'CONTEXTLESS', 'key': 'Windows'}]}]}}
     self.assertEqual(actual_payload, expected_payload)
+
+
+

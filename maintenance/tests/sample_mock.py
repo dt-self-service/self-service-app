@@ -16,35 +16,13 @@ from dynatrace.requests.request_handler import no_ssl_verification
 
 class ViewsTests(TestCase):
     def test_mock_sample2(self):
-        # Making a PUT request 
-        # url:
-        # https://lhh08344.live.dynatrace.com/api/config/v1/maintenanceWindows
-        # params
-        # {'Api-Token': 'EO0Yq0dsQPyhrgHz1VxpH'}
-        # json:
-        # {'name': 'MockServer2', 'description': 'MockServer', 'suppression': 'DETECT_PROBLEMS_AND_ALERT', 'schedule': {'recurrenceType': 'ONCE', 'start': '2019-01-15 23:00', 'end': '2019-01-15 23:04', 'zoneId': 'America/Toronto'}, 'type': 'PLANNED', 'scope': {'entities': [], 'matches': [{'type': 'OS', 'managementZoneId': 'null', 'tags': [{'context': 'CONTEXTLESS', 'key': 'Windows'}]}]}}
-        # [13/May/2020 20:17:09] "POST /maintenance/submit_create HTTP/1.1" 200 3
-
-        # sample request:
-        # {'id': '90916273-5320-410c-b7a0-5548711b52f1', 'name': 'MockServer2', 'description': 'MockServer'}
-
-        # To find some more details, you want to print the response.POST from requests on the views.py page.
-        # To find query data for mocks, you want to add the followinglines to the request handler from the framework:
-        # print("url: \n" + generate_tenant_url(cluster, tenant) + "/api/config/v1/" + endpoint)
-        # print("params")
-        # print(params)
-        # print("json:")
-        # print(json)
-
-       
-
         mock_server_ex = 'https://localhost:1080/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "POST",
                 "path" : "/api/config/v1/maintenanceWindows",
                 "queryStringParameters" : {
-                    "Api-Token" : [ "EO0Yq0dsQPyhrgHz1VxpH" ]
+                    "Api-Token" : [ "sample_api_token" ]
                 },
                 "body": {
                     "type": "JSON",

@@ -15,27 +15,13 @@ from dynatrace.requests.request_handler import no_ssl_verification
 
 class ViewsTests(TestCase):
     def test_submit_create(self):
-        # Making a PUT request 
-        # url:
-        # https://lhh08344.live.dynatrace.com/api/config/v1/maintenanceWindows
-        # params
-        # {'Api-Token': 'EO0Yq0dsQPyhrgHz1VxpH'}
-        # json:
-        # {'name': 'MockServer2', 'description': 'MockServer', 'suppression': 'DETECT_PROBLEMS_AND_ALERT', 'schedule': {'recurrenceType': 'ONCE', 'start': '2019-01-15 23:00', 'end': '2019-01-15 23:04', 'zoneId': 'America/Toronto'}, 'type': 'PLANNED', 'scope': {'entities': [], 'matches': [{'type': 'OS', 'managementZoneId': 'null', 'tags': [{'context': 'CONTEXTLESS', 'key': 'Windows'}]}]}}
-        # [13/May/2020 20:17:09] "POST /maintenance/submit_create HTTP/1.1" 200 3
-
-        # sample request:
-        # {'id': '90916273-5320-410c-b7a0-5548711b52f1', 'name': 'MockServer2', 'description': 'MockServer'}
-
-       
-
         mock_server_ex = 'https://localhost:1080/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "POST",
                 "path" : "/api/config/v1/maintenanceWindows",
                 "queryStringParameters" : {
-                    "Api-Token" : [ "EO0Yq0dsQPyhrgHz1VxpH" ]
+                    "Api-Token" : [ "sample_api_token" ]
                 },
                 "body": {
                     "type": "JSON",
@@ -69,23 +55,13 @@ class ViewsTests(TestCase):
         self.assertEquals(response.status_code, 200)
 
     def test_submit_update(self):
-
-
-        # <QueryDict: {'csrfmiddlewaretoken': ['D33rQHPAKN1qhk62yI1JBpA5O6rPWfhJeKghnb4o9HQFkIQrScqQGCNAYxpfpJLy'], 'cluster_name': ['Dynatrace_LIVE'], 'tenant_name': ['tenant1'], 'window_id': ['90916273-5320-410c-b7a0-5548711b52f1'], 'window_name': ['Updated Window'], 'window_planned': ['True'], 'window_description': ['Updated'], 'window_recurrence': ['ONCE'], 'window_day_of_week': [''], 'window_day_of_month': ['1'], 'window_supression': ['DETECT_PROBLEMS_AND_ALERT'], 'window_start_time': [''], 'window_duration': [''], 'window_maintenance_start': ['2019-01-15 23:00'], 'window_maintenance_end': ['2019-01-15 23:05'], 'form-TOTAL_FORMS': ['1'], 'form-INITIAL_FORMS': ['0'], 'form-MIN_NUM_FORMS': ['0'], 'form-MAX_NUM_FORMS': ['10'], 'form-0-entity_type': ['OS'], 'form-0-tags_or_entities': ['TAGS'], 'form-0-filter_value': ['Windows'], 'form-__prefix__-entity_type': [''], 'form-__prefix__-tags_or_entities': [''], 'form-__prefix__-filter_value': ['']}>
-        # https://lhh08344.live.dynatrace.com/api/config/v1/maintenanceWindows/90916273-5320-410c-b7a0-5548711b52f1
-        # params
-        # {'Api-Token': 'EO0Yq0dsQPyhrgHz1VxpH'}
-        # json:
-        # {'name': 'Updated Window', 'description': 'Updated', 'suppression': 'DETECT_PROBLEMS_AND_ALERT', 'schedule': {'recurrenceType': 'ONCE', 'start': '2019-01-15 23:00', 'end': '2019-01-15 23:05', 'zoneId': 'America/Toronto'}, 'type': 'PLANNED'}
-        # [14/May/2020 03:18:38] "POST /maintenance/submit_update HTTP/1.1" 200 3
-
         mock_server_ex = 'https://localhost:1080/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "PUT",
                 "path" : "/api/config/v1/maintenanceWindows/90916273-5320-410c-b7a0-5548711b52f1",
                 "queryStringParameters" : {
-                    "Api-Token" : [ "EO0Yq0dsQPyhrgHz1VxpH" ]
+                    "Api-Token" : [ "sample_api_token" ]
                 },
                 "body": {
                     "type": "JSON",
@@ -116,25 +92,14 @@ class ViewsTests(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.json(), 204)
 
-
-    # # Nees mock or always deleted
     def test_delete(self):
-        # <QueryDict: {'window_id': ['75ce2954-1736-4dbe-9346-e6e6a3bd71a7'], 'cluster_name': ['Dynatrace_LIVE'], 'tenant_name': ['tenant1']}>
-        # https://lhh08344.live.dynatrace.com/api/config/v1/maintenanceWindows/75ce2954-1736-4dbe-9346-e6e6a3bd71a7
-        # params
-        # {'Api-Token': 'EO0Yq0dsQPyhrgHz1VxpH'}
-        # json:
-        # None
-        # 204
-
-
         mock_server_ex = 'https://localhost:1080/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "DELETE",
                 "path" : "/api/config/v1/maintenanceWindows/90916273-5320-410c-b7a0-5548711b52f1",
                 "queryStringParameters" : {
-                    "Api-Token" : [ "EO0Yq0dsQPyhrgHz1VxpH" ]
+                    "Api-Token" : [ "sample_api_token" ]
                 },
             },
             "httpResponse" : {
@@ -159,16 +124,6 @@ class ViewsTests(TestCase):
         self.assertEquals(response.status_code, 200)
         
     def test_get_window_details(self):
-        # <QueryDict: {'window_id': ['648449ba-3869-4836-82b9-c2bbcef758dc'], 'cluster_name': ['Dynatrace_LIVE'], 'tenant_name': ['tenant1']}>
-        # url:
-        # https://lhh08344.live.dynatrace.com/api/config/v1/maintenanceWindows/648449ba-3869-4836-82b9-c2bbcef758dc
-        # params
-        # {'Api-Token': 'EO0Yq0dsQPyhrgHz1VxpH'}
-        # json:
-        # None
-        # RESPONSE_DATA
-        # <Response [200]>
-        # {'metadata': {'configurationVersions': [0], 'clusterVersion': '1.192.96.20200507-085711'}, 'id': '648449ba-3869-4836-82b9-c2bbcef758dc', 'name': 'MockServer2', 'description': 'MockServer', 'type': 'PLANNED', 'suppression': 'DETECT_PROBLEMS_AND_ALERT', 'scope': {'entities': [], 'matches': [{'type': 'OS', 'managementZoneId': None, 'mzId': None, 'tags': [{'context': 'CONTEXTLESS', 'key': 'Windows'}], 'tagCombination': 'OR'}]}, 'schedule': {'recurrenceType': 'ONCE', 'start': '2019-01-15 23:00', 'end': '2019-01-15 23:04', 'zoneId': 'America/Toronto'}}
         mock_server_ex = 'https://localhost:1080/mockserver/expectation'
 
         data = [{
@@ -176,7 +131,7 @@ class ViewsTests(TestCase):
                 "method" : "GET",
                 "path" : "/api/config/v1/maintenanceWindows/90916273-5320-410c-b7a0-5548711b52f1",
                 "queryStringParameters" : {
-                    "Api-Token" : [ "EO0Yq0dsQPyhrgHz1VxpH" ]
+                    "Api-Token" : [ "sample_api_token" ]
                 }
             },
             "httpResponse" : {
@@ -207,15 +162,7 @@ class ViewsTests(TestCase):
         self.assertIn('schedule', response.json())
 
     def test_get_all_windows(self):
-        # <QueryDict: {'csrfmiddlewaretoken': ['2THLYNQ0rTm2xXfprBD6XQkwSHcfGNkXDAUBvh5OQNbhAlZOL52d23x128aF9hOM'], 'cluster_name': ['Dynatrace_LIVE'], 'tenant_name': ['tenant1']}>
-        # url:
-        # https://lhh08344.live.dynatrace.com/api/config/v1/maintenanceWindows
-        # params
-        # {'Api-Token': 'EO0Yq0dsQPyhrgHz1VxpH'}
-        # json:
-        # None
-        # RESPONSE_DATA
-        # <Response [200]>
+
         mock_server_ex = 'https://localhost:1080/mockserver/expectation'
 
         data = [{
@@ -223,7 +170,7 @@ class ViewsTests(TestCase):
                 "method" : "GET",
                 "path" : "/api/config/v1/maintenanceWindows",
                 "queryStringParameters" : {
-                    "Api-Token" : [ "EO0Yq0dsQPyhrgHz1VxpH" ]
+                    "Api-Token" : [ "sample_api_token" ]
                 }
             },
             "httpResponse" : {

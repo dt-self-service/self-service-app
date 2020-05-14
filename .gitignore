@@ -129,3 +129,4 @@ saml/settings.json
 saml/certs
 
 !saml/certs/README
+.DS_Store

@@ -78,6 +78,7 @@ def delete(request):
     tenant = request.POST['tenant_name']
     window_id = request.POST['window_id']
 
+    print (cluster, tenant, window_id)
     response = rh.config_delete(cluster, tenant, '/maintenanceWindows/' + window_id)
     print (response.url)
 

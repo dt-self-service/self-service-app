@@ -28,7 +28,7 @@ jobs:
           command: |
             git submodule update --init --recursive
             cp dynatrace_admin/settings.py.template dynatrace_admin/settings.py
-            cp .test/user_variables.py framework/user_variables.py
+            cp .circleci/user_variables.py framework/user_variables.py
       - run:
           command: |
             pip install pipenv

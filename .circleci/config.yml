@@ -16,7 +16,7 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
       - run: sudo apt update
-      - run: sudo apt install -y xmlsec
+      - run: sudo apt install -y libxmlsec1
       - run:
           command: |
             pip install pipenv

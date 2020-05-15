@@ -5,6 +5,7 @@ from maintenance import views
 
 from django.contrib.auth.models import User
 from django.test import Client
+from dynatrace.requests.request_handler import generate_tenant_url
 import user_variables as uv
 
 
@@ -15,7 +16,7 @@ from dynatrace.requests.request_handler import no_ssl_verification
 
 class ViewsTests(TestCase):
     def test_submit_create(self):
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = generate_tenant_url(uv.FULL_SET['Dynatrace_LIVE'], 'tenant1') + '/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "POST",
@@ -55,7 +56,7 @@ class ViewsTests(TestCase):
         self.assertEquals(response.status_code, 200)
 
     def test_submit_update(self):
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = generate_tenant_url(uv.FULL_SET['Dynatrace_LIVE'], 'tenant1') + '/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "PUT",
@@ -93,7 +94,7 @@ class ViewsTests(TestCase):
         self.assertEquals(response.json(), 204)
 
     def test_delete(self):
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = generate_tenant_url(uv.FULL_SET['Dynatrace_LIVE'], 'tenant1') + '/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "DELETE",
@@ -124,7 +125,7 @@ class ViewsTests(TestCase):
         self.assertEquals(response.status_code, 200)
         
     def test_get_window_details(self):
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = generate_tenant_url(uv.FULL_SET['Dynatrace_LIVE'], 'tenant1') + '/mockserver/expectation'
 
         data = [{
             "httpRequest" : {
@@ -163,7 +164,7 @@ class ViewsTests(TestCase):
 
     def test_get_all_windows(self):
 
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = generate_tenant_url(uv.FULL_SET['Dynatrace_LIVE'], 'tenant1') + '/mockserver/expectation'
 
         data = [{
             "httpRequest" : {

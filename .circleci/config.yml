@@ -1,0 +1,45 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/opt/self-service/
+    docker:
+      - image: circleci/python:3.8.1
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://root@localhost/selfservice?sslmode=disable
+          POSTGRES_USER: root
+          POSTGRES_DB: selfservice
+      - image: circleci/postgres:9.6.2
+        name: postgres
+        environment: # environment variables for the Postgres container.
+          POSTGRES_USER: root
+          POSTGRES_DB: selfservice
+      - image: mockserver/mockserver
+        name: mockserver.mockserver
+    steps:
+      - checkout # check out source code to working directory
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
+      - run: 
+          command: |
+            sudo apt update
+            sudo apt install -y libxml2-dev libxmlsec1-dev libxmlsec1-openssl
+      - run:
+          command: |
+            git submodule update --init --recursive
+            cp dynatrace_admin/settings.py.template dynatrace_admin/settings.py
+            cp .circleci/user_variables.py framework/user_variables.py
+      - run:
+          command: |
+            pip install pipenv
+            pipenv install
+            pipenv run python manage.py makemigrations
+            pipenv run python manage.py migrate
+      - run:
+          command: |
+            pipenv run python manage.py test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1

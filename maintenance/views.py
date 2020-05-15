@@ -13,6 +13,7 @@ from .process_window import parse_submit_form
 
 from dynatrace.tenant import maintenance
 import user_variables as uv
+from dynatrace.requests import request_handler as rh
 
 # Create your views here.
 
@@ -76,6 +77,9 @@ def delete(request):
     cluster = request.POST['cluster_name']
     tenant = request.POST['tenant_name']
     window_id = request.POST['window_id']
+
+    response = rh.config_get(cluster, tenant, '/maintenanceWindows/' + window_id)
+    print (response.url)
 
     window_details = maintenance.delete_window(
         uv.FULL_SET[cluster], tenant, window_id)

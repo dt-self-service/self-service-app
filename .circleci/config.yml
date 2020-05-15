@@ -16,8 +16,6 @@ jobs:
           POSTGRES_DB: selfservice
       - image: mockserver/mockserver
         name: mockserver.mockserver
-        network-alias: ["mockserver.mockserver"]
-        publish: "1080:1080"
     steps:
       - checkout # check out source code to working directory
       - run: sudo chown -R circleci:circleci /usr/local/bin

@@ -55,7 +55,7 @@ class ViewsTests(TestCase):
         self.assertEquals(response.status_code, 200)
 
     def test_submit_update(self):
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = 'https://' + FULL_SET['Dynatrace_LIVE']['url'] + '/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "PUT",
@@ -93,7 +93,7 @@ class ViewsTests(TestCase):
         self.assertEquals(response.json(), 204)
 
     def test_delete(self):
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = 'https://' + FULL_SET['Dynatrace_LIVE']['url'] + '/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "DELETE",
@@ -124,7 +124,7 @@ class ViewsTests(TestCase):
         self.assertEquals(response.status_code, 200)
         
     def test_get_window_details(self):
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = 'https://' + FULL_SET['Dynatrace_LIVE']['url'] + '/mockserver/expectation'
 
         data = [{
             "httpRequest" : {
@@ -163,7 +163,7 @@ class ViewsTests(TestCase):
 
     def test_get_all_windows(self):
 
-        mock_server_ex = 'https://localhost:1080/mockserver/expectation'
+        mock_server_ex = 'https://' + FULL_SET['Dynatrace_LIVE']['url'] + '/mockserver/expectation'
 
         data = [{
             "httpRequest" : {

@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-and-test:
+  build:
     working_directory: ~/opt/self-service/
     docker:
       - image: circleci/python:3.8.1

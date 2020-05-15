@@ -15,7 +15,7 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_DB: selfservice
       - image: mockserver/mockserver
-        name: mockserver
+        name: mockserver.mockserver
         network-alias: ["mockserver.mockserver"]
         publish: "1080:1080"
     steps:

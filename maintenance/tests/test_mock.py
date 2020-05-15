@@ -15,7 +15,7 @@ from dynatrace.requests.request_handler import no_ssl_verification
 
 class ViewsTests(TestCase):
     def test_submit_create(self):
-        mock_server_ex = 'https://' + uv.FULL_SET['Dynatrace_LIVE']['url'] + ':/mockserver/expectation'
+        mock_server_ex = 'https://' + uv.FULL_SET['Dynatrace_LIVE']['url'] + '/mockserver/expectation'
         data = [{
             "httpRequest" : {
                 "method" : "POST",

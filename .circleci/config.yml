@@ -17,6 +17,7 @@ jobs:
       - image: mockserver/mockserver
         name: mockserver
         network-alias: ["mockserver.mockserver"]
+        publish: "1080:1080"
     steps:
       - checkout # check out source code to working directory
       - run: sudo chown -R circleci:circleci /usr/local/bin
@@ -33,6 +34,8 @@ jobs:
       - run:
           command: |
             pip install pipenv
+            pipenv run python manage.py makemigrations
+            pipenv run python manage.py migrate
             pipenv install
       - run:
           command: |

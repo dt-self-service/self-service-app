@@ -15,6 +15,8 @@ jobs:
       - checkout # check out source code to working directory
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
+      - run: sudo apt update
+      - run: sudo apt install -y xmlsec
       - run:
           command: |
             pip install pipenv

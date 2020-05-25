@@ -29,7 +29,7 @@ jobs:
       - run:
           command: |
             git submodule update --init --recursive
-            cp dynatrace_admin/settings.py.template dynatrace_admin/settings.py
+            cp dynatrace_admin/settings.template.py dynatrace_admin/settings.py
             cp .circleci/user_variables.py framework/user_variables.py
       - run:
           command: |

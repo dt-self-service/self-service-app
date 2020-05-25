@@ -3,9 +3,6 @@ import fileinput
 import argparse
 from django.core.management.utils import get_random_secret_key
 
-def generate_secret():
-  return get_random_secret_key()
-
 def generate_allowed_hosts(allowed_hosts):
   allowed_string = "ALLOWED_HOSTS = ["
   for host in allowed_hosts:
@@ -39,7 +36,7 @@ def setup_settings_file(args):
       if args.smtp_host:
         print("EMAIL_HOST = \"" + str(args.smtp_host) + "\"")
         continue
-    if line.startswith("EMAIL_PORT"):
+    if line.startswith("EMAIL_PORT ="):
       if args.smtp_port:
         print("EMAIL_PORT = " + str(args.smtp_port))
         continue
@@ -55,7 +52,7 @@ def setup_settings_file(args):
       if args.smtp_use_tls:
         print("EMAIL_USE_TLS = " + str(parse_boolean(args.smtp_use_tls)))
         continue
-    if line.startswith("DEFAULT_FROM_EMAIL"):
+    if line.startswith("DEFAULT_FROM_EMAIL ="):
       if args.smtp_sender_email:
         print("DEFAULT_FROM_EMAIL = \"" + str(args.smtp_sender_email) + "\"")
         continue

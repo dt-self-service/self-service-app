@@ -154,3 +154,7 @@ EMAIL_HOST_USER = "SMTP USER EMAIL"
 EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = "SMTP USER PASSWORD"
 DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
+
+#This setup will change
+SSO_ADMIN_GROUP = 'selfservice-admin'
+SSO_USER_GROUP = 'selfservice-user'

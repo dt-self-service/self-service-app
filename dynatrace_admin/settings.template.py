@@ -83,10 +83,22 @@ WSGI_APPLICATION = 'dynatrace_admin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+#
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', ''),
+        'USER': os.environ.get('POSTGRES_USER', ''),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
 
@@ -140,5 +152,9 @@ EMAIL_HOST = "SMTP URL"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "SMTP USER EMAIL"
 EMAIL_USE_TLS = True
-EMAIL_HOST_PASSWORD="SMTP USER PASSWORD"
+EMAIL_HOST_PASSWORD = "SMTP USER PASSWORD"
 DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
+
+#This setup will change
+SSO_ADMIN_GROUP = 'selfservice-admin'
+SSO_USER_GROUP = 'selfservice-user'

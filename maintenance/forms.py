@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import formset_factory
 from django.utils import timezone
-import user_variables as uv
+from framework import user_variables
 
 SUPPRESSION_TYPES = [
     ("DETECT_PROBLEMS_AND_ALERT", "Detect problems and alert"),
@@ -20,7 +20,7 @@ RECURRENCE_TYPES = [
 ]
 
 CLUSTER_LIST = [("", "Choose Cluster")]
-for cluster in uv.FULL_SET:
+for cluster in user_variables.FULL_SET:
   CLUSTER_LIST.append((cluster, cluster))
 
 DAYS_OF_WEEK = [

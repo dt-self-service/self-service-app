@@ -8,7 +8,6 @@ class SamlAuth:
   def __call__(self, request):
     # Group information can be retreived from request.session['samlUserdata']['member']
     if 'samlNameId' in request.session:
-      print (request.session['samlUserdata']['member'])
       if settings.SSO_ADMIN_GROUP in request.session['samlUserdata']['member'] or \
           settings.SSO_USER_GROUP in request.session['samlUserdata']['member']:
         pass

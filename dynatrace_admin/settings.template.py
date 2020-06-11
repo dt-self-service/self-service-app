@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'sso.apps.SSOConfig',
     'dashboard.apps.DashboardConfig',
     'maintenance.apps.MaintenanceConfig',
+    'perms.apps.PermissionHandlerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

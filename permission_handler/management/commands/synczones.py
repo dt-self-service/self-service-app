@@ -29,7 +29,7 @@ class Command(BaseCommand):
               "|" + str(tenant) + "|" + str(zone['name'])
 
           # Create Permissions that do not exist yet & keeping track of groups that don't exist anymore
-          if not (current_permission: = Permission.objects.filter(codename=permission_codename, content_type=content_type)).exists():
+          if not (current_permission := Permission.objects.filter(codename=permission_codename, content_type=content_type)).exists():
             Permission.objects.create(
                 codename=permission_codename,
                 name=permission_codename,

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class PermissionHandlerConfig(AppConfig):
-    name = 'perms'
+  name = 'permission_handler'

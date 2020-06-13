@@ -6,8 +6,8 @@ from django.contrib.contenttypes.models import ContentType
 # Zone Perms for each app
 from maintenance.models import ZonePerms as maintenance_zone_perms
 
-from framework import user_variables
-from framework.dynatrace.tenant import management_zones
+import user_variables
+from dynatrace.tenant import management_zones
 
 
 class Command(BaseCommand):
@@ -44,8 +44,8 @@ class Command(BaseCommand):
                 content_type=ContentType.objects.get_for_model(
                     maintenance_zone_perms)
             )
-            initial_permissions = initial_permissions.exclude(
-                codename=permission_codename, content_type=content_type)
+          initial_permissions = initial_permissions.exclude(
+              codename=permission_codename, content_type=content_type)
       for unused_permission in initial_permissions:
         # Cant Delete so adding a REMOVED tag to the name to show the MZ is no longer
         # and permissions is moot

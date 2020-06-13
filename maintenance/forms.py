@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import formset_factory
 from django.utils import timezone
-from framework import user_variables
+import user_variables
 
 SUPPRESSION_TYPES = [
     ("DETECT_PROBLEMS_AND_ALERT", "Detect problems and alert"),

@@ -54,5 +54,5 @@ class Command(BaseCommand):
             content_type=ContentType.objects.get_for_model(
                 maintenance_zone_perms)
         ).update(
-            name=unused_permission.codename + " - REMOVED"
+            name="REMOVED - " + unused_permission.codename
         )

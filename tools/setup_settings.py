@@ -59,17 +59,18 @@ def setup_settings_file(args):
     
     print(line, end="")
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--settings-file', required=True)
-parser.add_argument('--debug', '-d', default=False) #TODO Function for Debug
-parser.add_argument('--allowed-hosts',required=True, nargs='+') #TODO Function
-parser.add_argument('--smtp-host')
-parser.add_argument('--smtp-port')
-parser.add_argument('--smtp-host-user')
-parser.add_argument('--smtp-host-password')
-parser.add_argument('--smtp-use-tls', default=True)
-parser.add_argument('--smtp-sender-email')
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--settings-file', required=True)
+  parser.add_argument('--debug', '-d', default=False) #TODO Function for Debug
+  parser.add_argument('--allowed-hosts',required=True, nargs='+') #TODO Function
+  parser.add_argument('--smtp-host')
+  parser.add_argument('--smtp-port')
+  parser.add_argument('--smtp-host-user')
+  parser.add_argument('--smtp-host-password')
+  parser.add_argument('--smtp-use-tls', default=True)
+  parser.add_argument('--smtp-sender-email')
 
-args = parser.parse_args()
-print (args)
-setup_settings_file(args)
+  args = parser.parse_args()
+  print (args)
+  setup_settings_file(args)

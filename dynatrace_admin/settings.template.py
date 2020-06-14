@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'sso.middleware.SamlAuth',
+    'setup.middleware.SetupConfig',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'request.middleware.RequestMiddleware',
 ]
@@ -154,3 +155,9 @@ EMAIL_HOST_USER = "SMTP USER EMAIL"
 EMAIL_USE_TLS = True
 EMAIL_HOST_PASSWORD = "SMTP USER PASSWORD"
 DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
+
+# Used for First Time Setup
+SETTINGS_TEMP_FILE = '/config/settings.py'
+ALLLOWED_HOST_FLAG = False
+SMTP_FLAG = False
+SETUP_FLAG = False

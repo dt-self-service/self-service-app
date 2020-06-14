@@ -130,3 +130,4 @@ saml/certs
 
 !saml/certs/README
 .DS_Store
+dynatrace_admin/settings-temp.py

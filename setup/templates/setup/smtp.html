@@ -1,0 +1,57 @@
+{% extends "setup/base.html" %}
+{% block title %}SMTP Setup{% endblock title %}
+{% block content %}
+{% load static %}
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">Step 2: SMTP Settings</h1>
+
+  {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Basic Card Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">SMTP Details</h6>
+    </div>
+    <div class="card-body">
+      <p>Please enter information regarding SMTP Setup</p>
+      
+      <form id="smtp_form" method="POST">
+        {% csrf_token %}
+        {% for field in form%}
+          <div id="div_id_{{ field.name }}">
+            <div class="small mb-1" for="{{ field.name }}">{{ field.label }}</div>
+            <div class="mb-1">
+              {{ field }}
+            </div>
+          </div>
+          {% endfor %}
+        </fieldset>
+
+        <div class="input-group mb-4">
+          <button type="submit" id="allow_host_submit" class="btn btn-success mb-4">Submit</button>
+          <a href="/setup/finish" class="btn btn-info mb-4">Skip and Finish</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block page_level_additions %}
+<!-- Page level plugins -->
+
+{% endblock page_level_additions %}

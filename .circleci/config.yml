@@ -29,17 +29,17 @@ jobs:
       - run:
           command: |
             git submodule update --init --recursive
-            cp dynatrace_admin/settings.template.py dynatrace_admin/settings.py
+            cp dynatrace_admin/settings.dev.py dynatrace_admin/settings.py
             cp .circleci/user_variables.py framework/user_variables.py
       - run:
           command: |
             pip install pipenv
-            pipenv install
+            pipenv install --dev
             pipenv run python manage.py makemigrations
             pipenv run python manage.py migrate
       - run:
           command: |
-            pipenv run python manage.py test
+            pipenv run python manage.py test --nocapture
       - store_test_results:
           path: test-results
       - store_artifacts:

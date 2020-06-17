@@ -54,7 +54,7 @@ class SyncZoneAdd(TestCase):
 
   def run_sync(self, MOCK_JSON, NAME_LIST):
     with no_ssl_verification():
-      requests.put(self.MOCK_SERVER_EX, json=MOCK_JSON)
+      requests.put(self.MOCK_SERVER_EX, json=MOCK_JSON, verify=False)
     call_command('synczones')
 
     fail_list = []

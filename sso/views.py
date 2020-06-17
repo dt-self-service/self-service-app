@@ -53,7 +53,6 @@ def index(request):
   print ("Session: " + str(request.session.items()))
 
   if 'sso' in req['get_data']:
-    # return HttpResponseRedirect(auth.login())
     # If AuthNRequest ID need to be stored in order to later validate it, do instead
     sso_built_url = auth.login()
     request.session['AuthNRequestID'] = auth.get_last_request_id()
@@ -74,12 +73,9 @@ def index(request):
     if 'samlNameIdSPNameQualifier' in request.session:
       name_id_spnq = request.session['samlNameIdSPNameQualifier']
 
-    # return HttpResponseRedirect(auth.logout(return_to="/",name_id=name_id, session_index=session_index, nq=name_id_nq, name_id_format=name_id_format, spnq=name_id_spnq))
     # If LogoutRequest ID need to be stored in order to later validate it, do instead
     slo_built_url = auth.logout(return_to="/",name_id=name_id, session_index=session_index, nq=name_id_nq, name_id_format=name_id_format, spnq=name_id_spnq)
     request.session['LogoutRequestID'] = auth.get_last_request_id()
-    # print ("SLO URL")
-    # print (slo_built_url)
     return HttpResponseRedirect(slo_built_url)
   elif 'acs' in req['get_data']:
     request_id = None
@@ -141,9 +137,6 @@ def attrs(request):
 
 
 def metadata(request):
-  # req = prepare_django_request(request)
-  # auth = init_saml_auth(req)
-  # saml_settings = auth.get_settings()
   saml_settings = OneLogin_Saml2_Settings(settings=None, custom_base_path=settings.SAML_FOLDER, sp_validation_only=True)
   metadata = saml_settings.get_sp_metadata()
   errors = saml_settings.validate_metadata(metadata)

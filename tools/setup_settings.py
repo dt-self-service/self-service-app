@@ -71,6 +71,8 @@ if __name__ == '__main__':
   parser.add_argument('--smtp-use-tls', default=True)
   parser.add_argument('--smtp-sender-email')
 
+
   args = parser.parse_args()
   print (args)
   setup_settings_file(args)
+

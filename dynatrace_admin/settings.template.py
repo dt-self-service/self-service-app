@@ -27,7 +27,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+raqb=*g=x%4fr=$i%7yl+ocy@z4tu1x8x6rhz3p2*@v+jztxg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+DEV = False if os.environ.get('SELF_SERVICE_DEV') != "TRUE" else True
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'request',
 ]
+
+if DEV:
+    INSTALLED_APPS.append('django_nose') #Extends Django Test Capabilites
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,16 +96,24 @@ WSGI_APPLICATION = 'dynatrace_admin.wsgi.application'
 #    }
 #}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', ''),
-        'USER': os.environ.get('POSTGRES_USER', ''),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
-        'HOST': 'postgres',
-        'PORT': '5432',
+if DEV:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', ''),
+            'USER': os.environ.get('POSTGRES_USER', ''),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+            'HOST': 'postgres',
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
@@ -159,3 +171,6 @@ DEFAULT_FROM_EMAIL = 'TestSite Team <noreply@example.com>'
 #This setup will change
 SSO_ADMIN_GROUP = 'selfservice-admin'
 SSO_USER_GROUP = 'selfservice-user'
+
+if DEV:
+    TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

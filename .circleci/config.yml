@@ -14,6 +14,7 @@ jobs:
         environment: # environment variables for the Postgres container.
           POSTGRES_USER: root
           POSTGRES_DB: selfservice
+          SELF_SERVICE_DEV: TRUE
       - image: mockserver/mockserver
         name: mockserver.mockserver
     steps:

@@ -60,12 +60,3 @@ class add_smtp_host(forms.Form):
         attrs = {'class': 'form-control'}
       )
     )
-
-
-
-# parser.add_argument('--smtp-host')
-# parser.add_argument('--smtp-port')
-# parser.add_argument('--smtp-host-user')
-# parser.add_argument('--smtp-host-password')
-# parser.add_argument('--smtp-use-tls', default=True)
-# parser.add_argument('--smtp-sender-email')

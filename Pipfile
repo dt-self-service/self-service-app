@@ -15,7 +15,7 @@ requests = "*"
 python3-saml= "*"
 django-request = "*"
 gunicorn = "*"
-psycopg2-binary = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.8"

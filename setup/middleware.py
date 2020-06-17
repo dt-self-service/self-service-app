@@ -9,10 +9,6 @@ class SetupConfig:
   def __call__(self, request):
 
     print(request.META['PATH_INFO'])
-    #print ('*' in project_settings.ALLOWED_HOSTS)
-    # if request.META['PATH_INFO'] != '/setup/initial/' and '*' in project_settings.ALLOWED_HOSTS:
-    #  #  print("inside")
-    #    return HttpResponseRedirect('/setup/initial/')
     if self.is_setup_redirect(request.META['PATH_INFO']):
       print('Setup Required')
       return HttpResponseRedirect("/setup/initial")
@@ -26,9 +22,6 @@ class SetupConfig:
   def is_setup_redirect(self, path):
     #Root, accounts/* and sso/ allowed without Auth
     if project_settings.SETUP_FLAG == False:
-      if path.startswith('/setup/'):
-        return False
-      else:
-        return True
+      return not path.startswith('/setup/')
     else:
       return False

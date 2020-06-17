@@ -29,6 +29,7 @@ SECRET_KEY = '+raqb=*g=x%4fr=$i%7yl+ocy@z4tu1x8x6rhz3p2*@v+jztxg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 DEV = False if os.environ.get('SELF_SERVICE_DEV') != "TRUE" else True
+print (DEV)
 
 ALLOWED_HOSTS = ['*']
 

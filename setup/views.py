@@ -14,7 +14,6 @@ from tools.setup_settings import generate_allowed_hosts, parse_boolean
 # Create your views here.
 
 def initial(request):
-  form = AddAllowedHost()
   if request.method == 'POST':
     form = AddAllowedHost(request.POST)
     # check whether it's valid:

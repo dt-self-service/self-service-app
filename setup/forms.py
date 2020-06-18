@@ -3,7 +3,7 @@ from django.forms import formset_factory
 
 
 
-class add_allowed_host(forms.Form):
+class AddAllowedHost(forms.Form):
   allowed_host = forms.CharField(
   label='Allowed Host Domain',
   widget = forms.TextInput(
@@ -11,7 +11,7 @@ class add_allowed_host(forms.Form):
       )
   )
 
-class add_smtp_host(forms.Form):
+class AddSMTPHost(forms.Form):
   smtp_host = forms.CharField(
   label = 'SMTP Host URL',
   required = True,

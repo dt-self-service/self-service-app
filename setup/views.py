@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import add_allowed_host
-from .forms import add_smtp_host
+from .forms import AddAllowedHost
+from .forms import AddSMTPHost
 from django.http import HttpResponseRedirect
 import fileinput
 
@@ -14,9 +14,9 @@ from tools.setup_settings import generate_allowed_hosts, parse_boolean
 # Create your views here.
 
 def initial(request):
-  form = add_allowed_host()
+  form = AddAllowedHost()
   if request.method == 'POST':
-    form = add_allowed_host(request.POST)
+    form = AddAllowedHost(request.POST)
     # check whether it's valid:
     print(form.is_valid())
     if form.is_valid():
@@ -35,14 +35,14 @@ def initial(request):
           print(line, end='')
         return HttpResponseRedirect('/setup/smtp')
   else:
-    form = add_allowed_host()
+    form = AddAllowedHost()
   return render(request, 'setup/initial.html', {'form': form})
 
 
 def smtp(request):
-  form = add_smtp_host()
+  form = AddSMTPHost()
   if request.method == 'POST':
-    form = add_smtp_host(request.POST)
+    form = AddSMTPHost(request.POST)
     # check whether it's valid:
     #print(form.is_valid())
     if form.is_valid():

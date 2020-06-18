@@ -8,6 +8,7 @@ FULL_SET = {
         "api_token": {
             "tenant1": "sample_api_token",
         },
+        "verify_ssl": False,
         "is_managed": False,
         "cluster_token": "Required for Cluster Operations in Managed"
     }

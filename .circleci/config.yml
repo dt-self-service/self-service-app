@@ -6,6 +6,7 @@ jobs:
       - image: circleci/python:3.8.1
         environment:
           PIPENV_VENV_IN_PROJECT: true
+          SELF_SERVICE_DEV: true
       - image: mockserver/mockserver
         name: mockserver.mockserver
     steps:
@@ -27,8 +28,6 @@ jobs:
           command: |
             pip install pipenv
             pipenv install --dev
-            pipenv run python manage.py makemigrations
-            pipenv run python manage.py migrate
       - run:
           command: |
             SELF_SERVICE_DEV=TRUE pipenv run python manage.py test

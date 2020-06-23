@@ -6,14 +6,7 @@ jobs:
       - image: circleci/python:3.8.1
         environment:
           PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/selfservice?sslmode=disable
-          POSTGRES_USER: root
-          POSTGRES_DB: selfservice
-      - image: circleci/postgres:9.6.2
-        name: postgres
-        environment: # environment variables for the Postgres container.
-          POSTGRES_USER: root
-          POSTGRES_DB: selfservice
+          SELF_SERVICE_DEV: true
       - image: mockserver/mockserver
         name: mockserver.mockserver
     steps:
@@ -34,12 +27,10 @@ jobs:
       - run:
           command: |
             pip install pipenv
-            pipenv install
-            pipenv run python manage.py makemigrations
-            pipenv run python manage.py migrate
+            pipenv install --dev
       - run:
           command: |
-            pipenv run python manage.py test
+            SELF_SERVICE_DEV=TRUE pipenv run python manage.py test
       - store_test_results:
           path: test-results
       - store_artifacts:

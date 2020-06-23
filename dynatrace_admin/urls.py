@@ -21,6 +21,5 @@ urlpatterns = [
     path('sso/', include('sso.urls')),
     path('maintenance/', include('maintenance.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('setup/', include('setup.urls')),
     path('', include('dashboard.urls')),
 ]

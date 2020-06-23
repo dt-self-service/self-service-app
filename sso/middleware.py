@@ -33,7 +33,6 @@ class SamlAuth:
     if path == "/" \
         or path == "/sso/" \
         or path.startswith("/accounts/") \
-        or path.startswith("/setup/") \
         or path.startswith("/admin"):
       return False
     else:

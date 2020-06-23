@@ -28,8 +28,6 @@ jobs:
           command: |
             pip install pipenv
             pipenv install --dev
-            pipenv run python manage.py makemigrations
-            SELF_SERVICE_DEV=TRUE pipenv run python manage.py migrate
       - run:
           command: |
             SELF_SERVICE_DEV=TRUE pipenv run python manage.py test

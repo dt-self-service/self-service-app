@@ -26,12 +26,12 @@ jobs:
       - run:
           command: |
             pip install pipenv
-            pipenv install
+            pipenv install --dev
             pipenv run python manage.py makemigrations
             pipenv run python manage.py migrate
       - run:
           command: |
-            pipenv run python manage.py test
+            SELF_SERVICE_DEV=TRUE pipenv run python manage.py test
       - store_test_results:
           path: test-results
       - store_artifacts:

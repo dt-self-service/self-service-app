@@ -6,6 +6,7 @@ jobs:
       - image: circleci/python:3.8.1
         environment:
           PIPENV_VENV_IN_PROJECT: true
+          SELF_SERVICE_DEV: true
       - image: mockserver/mockserver
         name: mockserver.mockserver
     steps:
